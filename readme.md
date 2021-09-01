@@ -27,7 +27,9 @@
  -> 재귀 : base case 가장 먼저 + (divide) + recursive by 가정+부분 문제조합
 
 4. [최적의 부분문제]를 구성한 배반의 부분문제들이 내려가면서 중복되는지 확인한다. -> Dynamic(Memo or Tabul or Tabul공간최적화)
-  
+ -> n-1 + n-2등으로 풀리는 부부문제의 경우는 거의 중복된다.
+ -> tabulation으로 풀거면, base case를 list의 0, 1에 미리 채워놓고, n단계에서 뽑아서 conquer해주면 된다.
+
 5. 조건별 부분1 + 2 + 3으로 나눈 것 중 배반문제가 아니라 [최대/최소 등 특정조건 1개 선택]이 답인지 확인한다. 조건 중에 최대값을 선택 + 그때의 부분문제가 원래 문제의 답인지 [Greedy algorithm]을 판단해서 푼다.
  -> - greedy는 재귀의 base/recursive는 사라지고 sorted( , reverse=True) or max(부분1, 부분2)로  부분문제 조건최대 택1의 일반 문제다. 직전까지의변수+for+현재항으로변수없뎃
  -> 직전이 있어야하므로, 값에 [0]값을 넣고 시작은 range(1,)부터 하는 sense
@@ -42,3 +44,4 @@
 
 ## 참고
  - master -> main으로 branch 변경
+ - test.py에 문제설명 속 python코드를 가져와 구현해보는 방법을 사용함.
