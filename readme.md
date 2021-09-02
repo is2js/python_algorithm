@@ -31,8 +31,10 @@
  -> n-1 + n-2등으로 풀리는 부부문제의 경우는 거의 중복된다.
  -> tabulation으로 풀거면, base case를 list의 0, 1에 미리 채워놓고, n단계에서 뽑아서 부분해결한 상태로 가정해서 conquer해주면 된다.
  -> memoization은 default값 없이 시작 + for  if key에있으면 return 없으면 =True 넣기. if에서 해결로직이 완성되었다.
- -> 자료형의 index탐색이 아닌, value값의 범위를 탐색할 때도, start,end의 인자가 필요하다. 특히 이진탐색의 mid활용시 부분문제conquer시 활용을 위해 원래함수에 인자로 존재해야함. <value탐색>은 이진의 절반 탐색이라도... index가 아니므로  <모든 요소를 돌면서> if 범위로 판단한다. ex> count=0 <모든 요소 for돌면서> if절반범위 count+=1
- -> 이진 탐색으로 푸는 부분문제는 한쪽만 해결하면 된다.
+ -> 자료형의 index탐색이 아닌, value값의 범위를 탐색할 때도, start,end의 인자가 필요하다. 특히 이진탐색의 mid활용시 부분문제conquer시 활용을 위해 원래함수에 인자로 존재해야함. 
+    - <value탐색>은 이진의 절반 탐색이라도... index가 아니므로  <모든 요소를 돌면서> if 범위로 판단한다. ex> count=0 <모든 요소 for돌면서> if절반범위 count+=1
+    - 또한, <value탐색>은 list는 그대로 두고, value의 범위만 바뀐체 탐색을 이어나간다. ex> 중복검사 자체를 list전체돌기 + value만의 범위만 바꿔서 탐색하기 때문에 
+ -> 이진 탐색으로 푸는 부분문제는 if 발견시 return왼쪽 / 아니면 return오른쪽 으로 해결한다.
 
 5. 조건별 부분1 + 2 + 3으로 나눈 것 중 배반문제가 아니라 [최대/최소 등 특정조건 1개 선택]이 답인지 확인한다. 조건 중에 최대값을 선택 + 그때의 부분문제가 원래 문제의 답인지 [Greedy algorithm]을 판단해서 푼다.
  -> - greedy는 재귀의 base/recursive는 사라지고 sorted( , reverse=True) or max(부분1, 부분2)로  부분문제 조건최대 택1의 일반 문제다. 직전까지의변수+for+현재항으로변수없뎃
