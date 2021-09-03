@@ -20,6 +20,7 @@
  -> 직전까지의 최대/최소값은 for i에서 (활용후) 업뎃해줘야한다.(return 최종업뎃값)
  -> ex> min_so_far = default -> for i -> (활용 후) 업뎃  : min_so_far = min( min_so_far, [i]항=마지막항과 비교하여 업뎃 ) or 업뎃만한 뒤, 바깥에서 return  최종업뎃값
  -> list에서 순서를 가진 2개의 변수가 돌아야한다면! 2중for문 이외에 -> 뒤에것을 기준(for i 고정)해야 앞에것의 최대/최소를 동시에(그 과정에서) 챙겨놓을 수 있다. 
+ -> 정렬된list라면, <<이진탐색>>을 먼저 생각하고 / 다른방법으로 <<양끝을 동시에 탐색>>하는데 while (index) low < high low+=1 high-=1 으로 붙이면서 탐색한다.
 2. input에 대한 [부분 문제]가 있는지 [Divide anc conquer]로 살펴본다 
  -> [input을 Divide and Conquer의 재귀]로 해결할 수 있다. **식을 짤 땐, 함수(n-1)을 풀었다고 가정**하고 부분문제들을 conquer한다.
  -> 부분 문제는  input 마지막 경우 = 조건별 부분1 + 부분2 or max(부분1, 부분2) 등으로 **배반**으로 나누어져 풀어진다면 최적의 부분문제다.(부분문제의 조합 = 원래문제 답)
@@ -27,16 +28,16 @@
  -> 재귀 : base case 가장 먼저 + (divide) + recursive by 가정+부분 문제조합
  -> value의 중복검사는 if해당범위<= and <= count+= 한 뒤, 범위구간 = 갯수시 중복X , 이진탐색으로 줄여나간다.
 
-4. [최적의 부분문제]를 구성한 배반의 부분문제들이 내려가면서 중복되는지 확인한다. -> Dynamic(Memo or Tabul or Tabul공간최적화)
+3. [최적의 부분문제]를 구성한 배반의 부분문제들이 내려가면서 중복되는지 확인한다. -> Dynamic(Memo or Tabul or Tabul공간최적화)
  -> n-1 + n-2등으로 풀리는 부부문제의 경우는 거의 중복된다.
- -> tabulation으로 풀거면, base case를 list의 0, 1에 미리 채워놓고, n단계에서 뽑아서 부분해결한 상태로 가정해서 conquer해주면 된다.
- -> memoization은 default값 없이 시작 + for  if key에있으면 return 없으면 =True 넣기. if에서 해결로직이 완성되었다.
+ -> tabulation(부분문제를 list[k-1], list[k-2]로 품)으로 풀거면, base case를 list의 0, 1에 미리 채워놓고, n단계에서 뽑아서 부분해결한 상태로 가정해서 conquer해주면 된다.
+ -> memoization(부분문제가 없음)은 default값 없이 시작 + for  if key에있으면 return 없으면 =True 넣기. if에서 해결로직이 완성되었다.
  -> 자료형의 index탐색이 아닌, value값의 범위를 탐색할 때도, start,end의 인자가 필요하다. 특히 이진탐색의 mid활용시 부분문제conquer시 활용을 위해 원래함수에 인자로 존재해야함. 
     - <value탐색>은 이진의 절반 탐색이라도... index가 아니므로  <모든 요소를 돌면서> if 범위로 판단한다. ex> count=0 <모든 요소 for돌면서> if절반범위 count+=1
     - 또한, <value탐색>은 list는 그대로 두고, value의 범위만 바뀐체 탐색을 이어나간다. ex> 중복검사 자체를 list전체돌기 + value만의 범위만 바꿔서 탐색하기 때문에 
  -> 이진 탐색으로 푸는 부분문제는 if 발견시 return왼쪽 / 아니면 return오른쪽 으로 해결한다.
 
-5. 조건별 부분1 + 2 + 3으로 나눈 것 중 배반문제가 아니라 [최대/최소 등 특정조건 1개 선택]이 답인지 확인한다. 조건 중에 최대값을 선택 + 그때의 부분문제가 원래 문제의 답인지 [Greedy algorithm]을 판단해서 푼다.
+4. 조건별 부분1 + 2 + 3으로 나눈 것 중 배반문제가 아니라 [최대/최소 등 특정조건 1개 선택]이 답인지 확인한다. 조건 중에 최대값을 선택 + 그때의 부분문제가 원래 문제의 답인지 [Greedy algorithm]을 판단해서 푼다.
  -> - greedy는 재귀의 base/recursive는 사라지고 sorted( , reverse=True) or max(부분1, 부분2)로  부분문제 조건최대 택1의 일반 문제다. 직전까지의변수+for+현재항으로변수없뎃
  -> 직전이 있어야하므로, 값에 [0]값을 넣고 시작은 range(1,)부터 하는 sense
 ```
