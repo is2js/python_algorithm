@@ -12,6 +12,23 @@
  - 문제마다 문제설명을 생략하면 재활용이 불가능하다고 판단했기 때문에 `jupyter notebook`형태로 문제 + 풀이 및 `풀이 주석`으로 학습한 것을 정리하고 있습니다.
     ![image-20210828121626358](https://raw.githubusercontent.com/is3js/screenshots/main/image-20210828121626358.png)
 
+### Big-O of n 알고리즘 (나올때마다 기록해두기)
+ - 이진탐색 : log(n)
+    - n의 start or end가 절반씩 줄거나 or 반복문의 index i *= 2 2배로 커지거나 or  n//2 로 절반씩 줌.
+    - `str()` log(n)이지만, 자리수d로 표기하면 O(d)
+ - 선형탐색 : n
+    - x `in` sequence
+    - `max`, `min`
+    - list의 append 제외 `insert, del, index, reverse`
+        - append : O(1) - 안움직이고 맨 뒤에 추가만 하면 되므로.
+        - slicing([a:b]) : O(b-a) 
+        - sort, sorted의 정렬 : nlogn
+ - sort, sorted : n log(n)
+    - for i  내부에 while j*=2  or  for i  while  i//2 j+=1
+ - 합병정렬, 퀵정렬 : n log(n)
+
+
+
 ### 알고리즘 패러다임 푸는 요령
 
 ```
