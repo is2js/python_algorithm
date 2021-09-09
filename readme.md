@@ -1,5 +1,7 @@
 ## 알고리즘 레포지토리
  
+ ![image-20210909211235458](https://raw.githubusercontent.com/is3js/screenshots/main/image-20210909211235458.png)
+ 
  - 처음 계획은 6가지 알고리즘 패러다임 및 기타 분류별로 정리한 예제를 노트북에 풀어놓는 것입니다.
      1. `정렬과 탐색` : 선형/이진탐색 + 선택/삽입정렬 
      2. `Brute Force` : 전체 다 살펴보는 방식의 문제
@@ -10,7 +12,6 @@
 
 
  - 문제마다 문제설명을 생략하면 재활용이 불가능하다고 판단했기 때문에 `jupyter notebook`형태로 문제 + 풀이 및 `풀이 주석`으로 학습한 것을 정리하고 있습니다.
-    ![image-20210828121626358](https://raw.githubusercontent.com/is3js/screenshots/main/image-20210828121626358.png)
 
 ### Big-O of n 알고리즘 (나올때마다 기록해두기)
  - 이진탐색 : log(n)
