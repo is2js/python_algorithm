@@ -38,6 +38,7 @@
 
 ```
 1. [BruteForce]로 해결되는지 확인한다.
+ -> 전체를 다 보는 경우가 많으며, for문이 다돌고 출력해야함. -> for문 끝나고 return하는 방식
  -> 풀이과정에서 중복만 검사하면 된다면, dict의 memoization고려
  -> 직전까지의 최대/최소값은 for i에서 (활용후) 업뎃해줘야한다.(return 최종업뎃값)
  -> ex> min_so_far = default -> for i -> (활용 후) 업뎃  : min_so_far = min( min_so_far, [i]항=마지막항과 비교하여 업뎃 ) or 업뎃만한 뒤, 바깥에서 return  최종업뎃값
