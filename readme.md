@@ -9,7 +9,7 @@
      4. `Dynamic Programming` : 부분문제 + 중복되는 문제를 memo(dict, 부분문제 없이 넣고 저장) or tabulation(list, base index 넣어놓고 처음부터, 부분문제가 list[k-1] 등)로 해결하기
      5. `Greedy Algorithm` : 부분문제 + 각 부분이 최대값을 선택했을 때가 정답
      6. `기타` 등 구현 : 기초 개념 및 한번에 생각하기 어려웠운, 배경지식이 필요한 개념.
-        - 소수 판별(isPrime2) / 소수 카운팅(에라토스테네스의 체) countPrimes, findPrimes / 소인수분해 factorize2, 중복제거시 findFactors / 
+        - 소수 판별(isPrime2) / 소수 카운팅(에라토스테네스의 체) countPrimes2, findPrimes / 소인수분해 factorize2, 중복제거 소인수 모음 findFactors / 
 
 
  - 문제마다 문제설명을 생략하면 재활용이 불가능하다고 판단했기 때문에 `jupyter notebook`형태로 문제 + 풀이 및 `풀이 주석`으로 학습한 것을 정리하고 있습니다.
