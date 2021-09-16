@@ -1,8 +1,10 @@
 ### 알고리즘 레포지토리
- 📂 01_codeup : 기초 100제 중 마지막 배열문제들(6092~6098)
- 📂 02_boj : 백준 단계별로 문제 풀기 中 다시 생각해볼 것들(bronze~)
  📜 concept1~6 : 프로그래머스 & 코드잇 기준 개념 정리
  📜 practice1~6 : 프로그래머스 & 코드잇 기준 Lv 1~3 문제들 정리
+ 📂 01_codeup
+   🐍 기초 100제 중 마지막 배열문제들(6092~6098)
+ 📂 02_boj : 백준 단계별로 문제 풀기 中 다시 생각해볼 것들(bronze~)
+   🐍 bronze부터 시작하는 boj문제 풀이 및 고찰
  
  ![image-20210909211235458](https://raw.githubusercontent.com/is3js/screenshots/main/image-20210909211235458.png)
  
@@ -13,7 +15,7 @@
      4. `Dynamic Programming` : 부분문제 + 중복되는 문제를 memo(dict, 부분문제 없이 넣고 저장) or tabulation(list, base index 넣어놓고 처음부터, 부분문제가 list[k-1] 등)로 해결하기
      5. `Greedy Algorithm` : 부분문제 + 각 부분이 최대값을 선택했을 때가 정답
      6. `기타` 등 구현 : 기초 개념 및 한번에 생각하기 어려웠운, 배경지식이 필요한 개념.
-        - 소수 판별(isPrime2) / 소수 카운팅(에라토스테네스의 체) countPrimes2, findPrimes / 소인수분해 factorize2, 중복제거 소인수 모음 findFactors / 
+        - 소수 판별(isPrime2) / 소수 카운팅(에라토스테네스의 체) countPrimes2, findPrimes / 소인수분해 factorize2, 중복제거 소인수 모음 findFactors / 최대공약수 /
 
 
  - 문제마다 문제설명을 생략하면 재활용이 불가능하다고 판단했기 때문에 `jupyter notebook`형태로 문제 + 풀이 및 `풀이 주석`으로 학습한 것을 정리하고 있습니다.
@@ -46,9 +48,9 @@
 
 ```
 0 [sort]시 직전애들과 비교하는, 삽입정렬 같은 경우, 0~i-1까지는 이미 정렬된 상태인 것을 생각하자.
- -> 삽입정렬: 각 i번째 값에 대하여 -> i=j와 j-1을 j번째값 기준으로 하나씩 비교해 shift를 끝낸 뒤, i번째값 value의 위치를 정한다.
- ->-> 즉 정렬된 묶음에서 하나를 삽입시키길, 오른쪽에서부터 shift 시켜서 끼워넣는 작전.
- ->-> shift를 for i를 고정시킨 상태에서, j=i + while j-1를 이용한 shift 조건 + j-=1 등으로 왼쪽으로 나아가는 알고리즘.
+ -> 정렬에서 i번째? i-1까지는 이미 정렬된 상태이다! 직전까지는 정렬된 상태에서  i번재 요소를 가지고 합류시켜 묶어서 정렬하는 삽입정렬.
+ -> 삽입정렬: 각 i번째 값에 대하여 -> i=j와 j-1을 j번째값 기준으로 하나씩 비교해 shift를 끝낸 뒤, i번째값 value의 위치를 끼워넣어주는 전략을 쓴다.
+ ->-> shift는 for i를 고정(i번째 shift의 기준 value만 고정)시킨 상태에서, j=i + while j-1를 이용한 shift 조건 + j-=1 등으로 왼쪽으로 나아가는 알고리즘.
 
 
 1. [BruteForce]로 해결되는지 확인한다.
