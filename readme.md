@@ -102,14 +102,14 @@
 ```
 
 
-## 문제 소스
- - 프로그래머스, Codeit, inflearn에서 제공되는 기초 및 level 1 ~ level 3 연습문제를 풀이해보겠습니다.
-
+### 문제 소스
+ - 프로그래머스, CodeUp, Codeit, inflearn에서 제공되는 기초 및 level 1 ~ level 3 연습문제를 풀이해보겠습니다.
+     - codeup : while조건 속에서 우선시되는 조건은 if elif else 의 위쪽우선순위로 올려놓으면 알아서 다음루프에서 우선순위부터 처리가 된다. 다만, 탈출조건은 가장 먼저 
  - 저작권은 해당 사이트에 있습니다.
 
 
 
-## 참고
+### 참고
  - master -> main으로 branch 변경
     - local에서 git init했다면, `git checkout -b main`부터 하고 시작.
  - test.py에 문제설명 속 python코드를 가져와 구현해보는 방법을 사용함.
