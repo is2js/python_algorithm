@@ -1,3 +1,7 @@
+## 느낀점 : while안에 다른변수 while 넣음녀 안됨..ㅠㅠ 
+# -> flag없다면 2중 for문은 break로 못벗어나게됨.
+
+
 ################ Input From input.txt ################
 import sys
 from pprint import pprint
@@ -13,38 +17,43 @@ pprint(data)
 
 x = 1
 y = 1
-
+data[x][y]=9
 locations = [] 
 
-## 느낀점 : while안에 다른변수 while 넣음녀 안됨..ㅠㅠ break로 못벗어나게됨.
 
 while x<=8 and y<= 8 :
     curr = data[x][y]
-    next = data[x+1][y]
-    next_y = data[x][y+1]
+    next_right = data[x][y+1]
+    next_bottom = data[x+1][y]
     # x판단
-    if next == 0:
-        x+=1
-    elif next == 2:
-        x+=1
-        print("찾음")
+    if next_right == 0:
+        y+=1
+        data[x][y]=9 #
+    elif next_right == 2:
+        y+=1
+        #rint("찾음")
+        data[x][y]=9 #
         break 
-    else :
-        print("x+1막혔다.")
-        while y<=8:
-        # y 판단
-            # x부터 먼저 살펴야함.. 막히지만 않으면 x판단으로 가얗됨.
-            if next != 1:
-                break 
-            elif next_y == 0:
-                y+=1
-            elif next_y == 2:
-                y+=1
-                print("찾음. y도 끝났따. flag?") 
-                break
+    else:
+        #print("y+1(right)막혔서 못갔음. x+1보기")
+        if next_right==0:
+          y+=1
+          data[x][y]=9
+        elif next_bottom == 0:
+            x+=1
+            data[x][y]=9 #
+        elif next_bottom == 2:
+            x+=1
+            data[x][y]=9 #
+            #print("찾음. y도 끝났따. flag?") 
+            break
+        else:
+          #data[x][y]=9 #
+          #print("y도 막혔으니 못가고 끝.막힌 것으로 끝.")
+          break
         
 
-
+pprint(data)
 
     
 
