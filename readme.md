@@ -1,10 +1,14 @@
+ - 참고: 📂 : 폴더/ 📜 : 쥬피터 노트북(.ipynb) / 🐍 : Python 파일들(.py)
+
 ### 알고리즘 레포지토리
- - 📜 concept1\~6 : 프로그래머스 & 코드잇 기준 개념 정리
- - 📜 practice1\~6 : 프로그래머스 & 코드잇 기준 Lv 1~3 문제들 정리
+ - 📜 concept01\~06 : 예제를 통한 알고리즘 6가지 분류 개념정리(프로그래머스, Codeit)
+ - 📜 practice01\~06 : 예제를 통한 알고리즘 6가지 분류 Lv1~3 문제풀이(프로그래머스, Codeit)
  - 📂 01_codeup
      - 🐍 기초 100제 중 마지막 배열문제들(6092\~6098)
  - 📂 02_boj : 백준 단계별로 문제 풀기 中 다시 생각해볼 것들(bronze~)
      - 🐍 bronze부터 시작하는 시간초과된 boj(백준) 문제 풀이 및 고찰
+ - 📂 99_기타구현_코드만 : concept06_etc(기타구현)의 주제별 코드부분만 정리하는 폴더
+     - 🐍 concept06_etc(기타구현)의 코드부분만 정리한 py파일
  
  ![image-20210909211235458](https://raw.githubusercontent.com/is3js/screenshots/main/image-20210909211235458.png)
  
@@ -15,10 +19,7 @@
      4. `Dynamic Programming` : 부분문제 + 중복되는 문제를 memo(dict, 부분문제 없이 넣고 저장) or tabulation(list, base index 넣어놓고 처음부터, 부분문제가 list[k-1] 등)로 해결하기
      5. `Greedy Algorithm` : 부분문제 + 각 부분이 최대값을 선택했을 때가 정답
      6. `기타` 등 구현 : 기초 개념 및 한번에 생각하기 어려웠운, 배경지식이 필요한 개념.
-        - 소수 판별(isPrime2) / 소수 카운팅(에라토스테네스의 체) countPrimes2, findPrimes / 소인수분해 factorize2, 중복제거 소인수 모음 findFactors / 최대공약수 /
-
-
- - 문제마다 문제설명을 생략하면 재활용이 불가능하다고 판단했기 때문에 `jupyter notebook`형태로 문제 + 풀이 및 `풀이 주석`으로 학습한 것을 정리하고 있습니다.
+        - 소수 판별(isPrime2) / 소수 카운팅(에라토스테네스의 체) countPrimes2, findPrimes / 소인수분해 factorize2, 중복제거 소인수 모음 findFactors / 최대공약수 / 최소공배수
 
 ### Big-O of n 알고리즘 (나올때마다 기록해두기)
  - 이진탐색 : log(n)
@@ -59,6 +60,8 @@
  --> 증가하는 index에 대하여 while < N and <M 은 둘 중에 하나라도 먼저 끝나면 while문도 종료된다. -> 다돈 것이므로 나머지가 있는 것도 챙겨주자.
  --> while i < and j < 를 동시에 돌면서 조건도 동시에 있다면, 둘 중에 하나가 끝나면 끝인경우다 -> 뭐가 먼저 끝나는지 다돌고 판단해주는 sense
  --> if담에 무조건 else만 생각X 추가적으로 다른 경우의수도 있다면 elif 조건만 주자. else는 모든 배반의 경우라서.. 찝찝.
+ -> 퀵정렬 : list가 함수내부에서도 접근되는 것을 이용하여 return이 없는 재귀문제가 됨. list의 맨마지막 값을 기준(pivot)으로 설정하여 그보다 작은 그룹 + pivot + 큰그룹으로 나눠서 divide를 함수내부에서 해주고, small그룹과 big그룹을 각각 분할정복함. 가운데 pivot은 가운데서 유지되며 index를 반환해주는데, 그 index를 기준으로 부분문제들 input이 됨.
+ --> index를 input로하는 부분문제들은, base case를 정렬해야될 갯수(end-start+1)가 1개 이하면 정렬안해도된다. 자기자신을 반환하거나 아무것도 안하거나.
 
 
 1. [BruteForce]로 해결되는지 확인한다.
