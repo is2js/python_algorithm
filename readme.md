@@ -1,4 +1,4 @@
- - 참고: 📂 : 폴더/ 📜 : 쥬피터 노트북(.ipynb) / 🐍 : Python 파일들(.py)
+ - 📂(folder/)  📜 (.ipynb)   🐍(.py)
 
 ### 알고리즘 레포지토리
  - 📜 concept01\~06 : 예제를 통한 알고리즘 6가지 분류 개념정리(프로그래머스, Codeit)
@@ -19,7 +19,7 @@
      4. `Dynamic Programming` : 부분문제 + 중복되는 문제를 memo(dict, 부분문제 없이 넣고 저장) or tabulation(list, base index 넣어놓고 처음부터, 부분문제가 list[k-1] 등)로 해결하기
      5. `Greedy Algorithm` : 부분문제 + 각 부분이 최대값을 선택했을 때가 정답
      6. `기타` 등 구현 : 기초 개념 및 한번에 생각하기 어려웠운, 배경지식이 필요한 개념.
-        - 소수 판별(isPrime2) / 소수 카운팅(에라토스테네스의 체) countPrimes2, findPrimes / 소인수분해 factorize2, 중복제거 소인수 모음 findFactors / 최대공약수 / 최소공배수
+        - 소수 판별(isPrime2) / 소수 카운팅(에라토스테네스의 체) countPrimes2, findPrimes / 소인수분해 factorize2, 중복제거 소인수 모음 findFactors / 공통 소인수 commonFactors -> gcd2 공통소인수들의 누적곱/ 최소공배수
 
 ### Big-O of n 알고리즘 (나올때마다 기록해두기)
  - 이진탐색 : log(n)

@@ -112,7 +112,7 @@ print('❤5-1,2 countPrimes2(n), findPrimes(n) 범위내 소수 복수개 판단
 # -   해당 소수가 약수임이 확정되면 -> while 재귀조건문을 이용해 -> 안나누어떨어질때까지 계속 갯수를 그대로 챙긴다.
 # -> 2로 나누어떨어지면, n//2를 다시 한번 2로 나누어떨어지는지 확인 -> 반복
 
-# 6-2 factorize2(n) : 루트(n)까지 초기항에 +1씩으로 탐색(소수후보미리X) + 주의사항 : 마지막n의 몫이 1?(append ㄴㄴ) 아니면 덩어리?(-> 몫도 append해야할 소인수)
+# 6-2 factorize2(n) : 루트(n)까지 초기항2부터 +1씩으로 탐색(소수후보미리X) + 주의사항 : 마지막n의 몫이 1?(append ㄴㄴ) 아니면 덩어리?(-> 몫도 append해야할 소인수)
 # --------소인수 분해 손으로 할 때 1이 남는경우/ 2~3 등 숫자가 남는 경우 나눠서 생각해보기
 # --------factor line | n line 으로 손으로 쭉쭉 분해해나갈때, factor는 +1씩 루트(n)까지만 증가. 한 번 나눠떨어진 factor는 안나올때까지 계속 -> 
 # -------- n은 n//factor로 기하급수적으로 주는데 반해, factor는+1씩 증가중이다. ->
@@ -133,7 +133,6 @@ def factorize2(n):
 
     # 구현) 탐색범위동안 반복을 위한 while  -> 단순 탐색은 i+=1 등으로 범위가 줄여나간다.
     #       이 문제에서는 내부while에 의해 n이 팍팍 줄어들어서... 최초 루트(n)보다 값이 점점 작아지는데..
-    
     while factor ** 2 <= n : 
         # 구현) if재귀조건문을 대신하는 while : 업데이트가 팍팍되는 특징.
         while n % factor == 0:
@@ -142,6 +141,7 @@ def factorize2(n):
         # 할수있는만큼 반복되었으면, factor를 한 단계 높여줌
         factor+=1
     
+
     # 15 -> 3 x 5인데, 3까지만 하고.. 루트(15)-> 4보다 작아서.. 돌지못하고 끝났다.
     # -> 끝났으면 그냥 자동적으로 소인수은 탐색되었고, 나머지 쌩둥맞게 큰거만 따로 챙겨야한다.
     # -> 4 = 2 x 2 로 끝났으면 n은 1이 되어있다.  15 = 3 x 끝(5)에서 루트(n)을 넘어선 놈은.. 
@@ -153,13 +153,82 @@ def factorize2(n):
 
     return factors
 
-         
+
+print('❤6 factorize2(n) >',factorize2(n))
 
 
-print('❤6 factorize2(15) >',factorize2(15))
+## 7. divisors(n) : 소인수(약수이면서 소수, 2~n-1 범위)가 아니라 그냥 약수는 1~n까지 나누어 떨어지면 약수다.
+# - cf) 소수는 2~n-1까지 나누어떨어지지 않는 수 <->와는 반대로 1~n까지 나누어떨어지는 수
+def divisors(n):
+    div = []
+    for i in range(1, n+1):
+        if n % i == 0:
+            div.append(i)
+    return div 
+    
+print(f'7 divisors({n}): 1부터 찾다보니 순서대로 약수 list>',divisors(n))
 
 
-### 7. 
-# print('❤3 isPrime2(n) >',isPrime(n))
+x = 78696
+y = 19332
+
+## 8. commons( divisors(n), divisors(m))  with divisors() : 2수에 대한 약수list들을 받았을 때 공통부분만 뽑아내는  것
+def commons( n, m) :
+    comm = [] 
+    for i in n: 
+        if i in m:
+            comm.append(i)
+    return comm
 
 
+print(f'8 commons( divisors({x}), divisors({y})) : ',commons( divisors(x), divisors(y)))
+
+## 9. gcd : commons 중 중 제일 마지막 값  with commons(divisors(n), divisors(m)) 
+def gcd(x, y):
+    div_x = divisors(x)
+    div_y = divisors(y)
+    comm = commons(div_x, div_y)
+    return comm[-1]
+
+
+
+# 10. commFactors with factorize2(): 약수들->공약수->마지막값 (X) 소인수분해 -> 공통 소인수(-> 누적곱) 
+# **2~n-1까지 각 소인수들 소인수분해** -> 공통 소인수들 뽑기 로직 -> 누적곱으로 최대공약수
+# ** 즉 소인수분해를 이용한 공통 소인수의 곱 = 최대공약수 **
+# -> factorize2 : 2부터 +1씩.. ~루트n까지 나누어떨어질만큼 나누면서 챙기기. 소수들만 안모아놔도 알아서 소인수분해됨.
+# - 소인수들을 돌면서 공통만 뽑아내는 과정은 i,j가 같이 돌아서 -> while에 같이 넣고, 하나끝날때까지 = and에 2개다 범위넣어서... 끝나면 어느 것이 끝났는지.. 확인필요?
+# -> merge sort와 달리.. 어느것이 먼저 끝났는지 확인해볼 필요까진 없다.
+def commonFactors(factorized_list1, factorized_list2):
+    i, j= 0, 0 
+    commons = [] 
+
+    while i < len(factorized_list1) and j < len(factorized_list1):
+        if factorized_list1[i] == factorized_list2[j]:
+            commons.append(factorized_list1[i])
+            i+=1
+            j+=1
+        elif factorized_list1[i] > factorized_list2[j]:
+            j+=1
+        else:
+            i+=1
+
+    # 누가 먼저 끝났는지.+ 그나머지를 이용할 필요가 없음. dislike merge_sort 
+    return commons
+
+
+print(f'❤10 commFactors(factorize2({x}),factorize2({y})) : ',commonFactors(factorize2(x), factorize2(y)))
+ 
+
+
+# 11, gcd2 with factorize2, commFactors
+def gcd2(n, m):
+    f_n = factorize2(n)
+    f_m = factorize2(m)
+    factors = commonFactors(f_n, f_m)
+
+    gcd=1
+    for i in factors:
+        gcd*=i
+    return gcd
+
+print(f'❤11 gcd2({x},{y}) with factorize2, commFactors: ', gcd2(x, y))
