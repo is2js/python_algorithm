@@ -19,7 +19,7 @@
      4. `Dynamic Programming` : 부분문제 + 중복되는 문제를 memo(dict, 부분문제 없이 넣고 저장) or tabulation(list, base index 넣어놓고 처음부터, 부분문제가 list[k-1] 등)로 해결하기
      5. `Greedy Algorithm` : 부분문제 + 각 부분이 최대값을 선택했을 때가 정답
      6. `기타` 등 구현 : 기초 개념 및 한번에 생각하기 어려웠운, 배경지식이 필요한 개념.
-        - 소수 판별(isPrime2) / 소수 카운팅(에라토스테네스의 체) countPrimes2, findPrimes / 소인수분해 factorize2, 중복제거 소인수 모음 findFactors / 공통 소인수 commonFactors -> gcd2 공통소인수들의 누적곱/ 최소공배수
+        - 소수 판별(isPrime2) / 소수 카운팅(에라토스테네스의 체) countPrimes2, findPrimes / 소인수분해 factorize2, 중복제거 소인수 모음 findFactors / 공통 소인수 commonFactors -> gcd2 공통소인수들의 누적곱/ math.gcd와 최소공배수 lcm /
 
 ### Big-O of n 알고리즘 (나올때마다 기록해두기)
  - 이진탐색 : log(n)
@@ -62,7 +62,7 @@
  --> if담에 무조건 else만 생각X 추가적으로 다른 경우의수도 있다면 elif 조건만 주자. else는 모든 배반의 경우라서.. 찝찝.
  -> 퀵정렬 : list가 함수내부에서도 접근되는 것을 이용하여 return이 없는 재귀문제가 됨. list의 맨마지막 값을 기준(pivot)으로 설정하여 그보다 작은 그룹 + pivot + 큰그룹으로 나눠서 divide를 함수내부에서 해주고, small그룹과 big그룹을 각각 분할정복함. 가운데 pivot은 가운데서 유지되며 index를 반환해주는데, 그 index를 기준으로 부분문제들 input이 됨.
  --> index를 input로하는 부분문제들은, base case를 정렬해야될 갯수(end-start+1)가 1개 이하면 정렬안해도된다. 자기자신을 반환하거나 아무것도 안하거나.
-
+ -> 퀵정렬 : input이 index이며 부분 문제에서는 줄어든 값이 들어가야한다. def func(default=상수, 상수가 아니면 default=None주고 함수내부에서 확인)패턴을 사용해서, `default값은 있어서 안줘도 되는데(호출시 입력X), 혹시라도 값을 줄거면(내부에서 재귀적으로 부분문제 풀면서 입력) 그걸로 대체`하도록 하게 하자.
 
 1. [BruteForce]로 해결되는지 확인한다.
  -> 전체를 다 보는 경우가 많으며, for문이 다돌고 출력해야함. -> for문 끝나고 return하는 방식
