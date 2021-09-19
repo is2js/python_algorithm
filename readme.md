@@ -19,7 +19,7 @@
      4. `Dynamic Programming` : 부분문제 + 중복되는 문제를 memo(dict, 부분문제 없이 넣고 저장) or tabulation(list, base index 넣어놓고 처음부터, 부분문제가 list[k-1] 등)로 해결하기
      5. `Greedy Algorithm` : 부분문제 + 각 부분이 최대값을 선택했을 때가 정답
      6. `기타` 등 구현 : 기초 개념 및 한번에 생각하기 어려웠운, 배경지식이 필요한 개념.
-        - 소수 판별(isPrime2) / 소수 카운팅(에라토스테네스의 체) countPrimes2, findPrimes / 소인수분해 factorize2, 중복제거 소인수 모음 findFactors / 공통 소인수 commonFactors -> gcd2 공통소인수들의 누적곱/ math.gcd와 최소공배수 lcm /
+        - 소수 판별(isPrime2) / 소수 카운팅(에라토스테네스의 체) countPrimes2, findPrimes / 소인수분해 factorize2, 중복제거 소인수 모음 findFactors / 공통 소인수 commonFactors -> gcd2 공통소인수들의 누적곱/ math.gcd와 최소공배수 lcm, lcmFromTo /
 
 ### Big-O of n 알고리즘 (나올때마다 기록해두기)
  - 이진탐색 : log(n)
@@ -110,6 +110,11 @@
  -> if문을 썼는데, 재귀처럼 반복된다면 -> while [if재귀문]을 올리고 -> 해석 : [계속 ~ 할때까지] 작성하고 / 그 [더이상 ~ 않는다면, ~가 끝났다면] 으로 해석하면서 while문 끝난 밑으로 내려온다.
    - 이 때, if 문안에서 `한 factor에 대해 n이 줄면서 업데이트 되는 과정`이 있기 때문에 가능한 듯 싶다. 줄면서 업데이트되는 n = 재귀, 부분문제와 상관되는데, while로 해결할 수 있다.
  -> `not in 모으는 곳`을 통해 **없으면 넣어라(append)**를 활용할 수 있음. 사실상 `중복 제거 모으기`라면 set을 써도 되지만...
+ -> 직전까지 업데이트 변수 or 누적합, 누적곱처럼 누적lcm도 [for문 위 updated될 변수 or 누적변수 = 직전까지의 lcm  + for + 현재lcm으로 업데이트 후 누적 ]을 반복한다.
+ -> 두 list에서 공통인 것은 1번만 챙겨야할 경우, if 같으면 챙긴다+둘다 index증가 elif 다른데, i가 작은경우 -> 작은경우를 챙기고 키워준다. 키웠을 때 같아질 수 있으니.! 같아진다면 또 한번만 챙겨야한다! -> else 다른데, j가 작은 경우-> 작은쪽이 100% 홀로남겨지는 놈이니 이놈을 챙기고 키워준다.
+ 
+
+
 ```
 
 
