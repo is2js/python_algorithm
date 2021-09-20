@@ -90,7 +90,7 @@
  -> 부분문제로 나눌시 탐색범위가 끝만 조정되는게 아니라, 앞뒤가 조정되는 경우, start, end 둘다 받는다.
 
 3. [최적의 부분문제]를 구성한 배반의 부분문제들이 내려가면서 중복되는지 확인한다. -> Dynamic(Memo or Tabul or Tabul공간최적화)
- -> n-1 + n-2등으로 풀리는 부부문제의 경우는 거의 중복된다.
+ -> n-1 + n-2등으로 풀리는 부부문제의 경우는 거의 중복된다. 참고로 n//2 의 mid활용, merge_sort 등에서 input의 길이로 부분문제를 만드는 경우에는 중복이 없다.
  -> tabulation(부분문제를 list[k-1], list[k-2]로 품)으로 풀거면, base case를 list의 0, 1에 미리 채워놓고, n단계에서 뽑아서 부분해결한 상태로 가정해서 conquer해주면 된다.
  -> memoization(부분문제가 없음)은 default값 없이 시작 + for  if key에있으면 return 없으면 =True 넣기. if에서 해결로직이 완성되었다.
  -> 자료형의 index탐색이 아닌, value값의 범위를 탐색할 때도, start,end의 인자가 필요하다. 특히 이진탐색의 mid활용시 부분문제conquer시 활용을 위해 원래함수에 인자로 존재해야함. 
