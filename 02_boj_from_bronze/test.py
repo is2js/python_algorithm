@@ -4,18 +4,48 @@ import sys
 from pprint import pprint
 sys.stdin = open("./input.txt", "rt")
 ######################################################
-N = int(input())
 
 
-def func(n):
-    k = n//3
-    matrix = [ [func(k)] * k for _ in range(k)] 
-    matrix[k:k+1][k//2] = ' '
-    return '\n'.join([ ''.join(row) for row in matrix])
-# 재귀적으로 되려면,, 첫번째 것도. append식으로 채워할듯하다.
-# - 문자열로는답이 없다. -> 행렬로 처리
-n=9
-k = n//3
-matrix = [ [func(3)] * k for _ in range(k)] 
+prev_ = ["***", "* *", "***"]
 
-func(9)
+first_row = [x*3 for x in prev_]
+# ['*********', '* ** ** *', '*********']
+mid_row = [x + ' '*(9//3) + x for x in prev_]
+# ['***   ***', '* *   * *', '***   ***']
+
+# next_ = [first_row, mid_row, first_row]
+# [['*********', '* ** ** *', '*********'], ['***   ***', '* *   * *', '***   ***'], ['*********', '* ** ** *', '*********']]
+# '\n'.join(list)로 다 서야하기 때문에, extend로 연결만 하면된다.
+next_ = first_row + mid_row + first_row
+# ['*********', '* ** ** *', '*********', '***   ***', '* *   * *', '***   ***', '*********', '* ** ** *', '*********']
+# print(next_)
+
+def fractal(n):
+    if n==1:
+        return['*']
+
+    prev_ = fractal(n//3)
+    first_row = [x*3 for x in prev_]
+    mid_row = [x + ' '*(n//3) + x for x in prev_]
+    return  first_row + mid_row + first_row
+
+
+print('\n'.join(fractal(81)))
+
+
+    
+
+# ********* 
+# * ** ** *
+# *********
+
+# ***   ***
+# * *   * *
+# ***   ***
+
+# *********
+# * ** ** *
+# *********
+
+# next_
+
