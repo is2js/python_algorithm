@@ -5,47 +5,24 @@ from pprint import pprint
 sys.stdin = open("./input.txt", "rt")
 ######################################################
 
+# 느낀점 : 
+################ Input From input.txt ################
+import sys
+from pprint import pprint
+sys.stdin = open("./input.txt", "rt")
+######################################################
+# 느낀점
 
-prev_ = ["***", "* *", "***"]
+N= int(input()) # 그 당시(제일 큰)의 빈 행렬을 만들기 위해 받아놓고 바로 처리
 
-first_row = [x*3 for x in prev_]
-# ['*********', '* ** ** *', '*********']
-mid_row = [x + ' '*(9//3) + x for x in prev_]
-# ['***   ***', '* *   * *', '***   ***']
+# 
 
-# next_ = [first_row, mid_row, first_row]
-# [['*********', '* ** ** *', '*********'], ['***   ***', '* *   * *', '***   ***'], ['*********', '* ** ** *', '*********']]
-# '\n'.join(list)로 다 서야하기 때문에, extend로 연결만 하면된다.
-next_ = first_row + mid_row + first_row
-# ['*********', '* ** ** *', '*********', '***   ***', '* *   * *', '***   ***', '*********', '* ** ** *', '*********']
-# print(next_)
+def hanoi(n, start, end):
+    if n == 1:
+        print(1, 3)
 
-def fractal(n):
-    if n==1:
-        return['*']
-
-    prev_ = fractal(n//3)
-    first_row = [x*3 for x in prev_]
-    mid_row = [x + ' '*(n//3) + x for x in prev_]
-    return  first_row + mid_row + first_row
-
-
-print('\n'.join(fractal(81)))
-
-
-    
-
-# ********* 
-# * ** ** *
-# *********
-
-# ***   ***
-# * *   * *
-# ***   ***
-
-# *********
-# * ** ** *
-# *********
-
-# next_
+    hanoi(n-1, 1, 2)
+    print(1, 3)
+    hanoi(n-1, 2, 3)
+    return 
 
