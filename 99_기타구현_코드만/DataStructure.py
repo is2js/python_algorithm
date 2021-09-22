@@ -38,7 +38,7 @@ class DoublyLinkedList:
             if curr.next.next is not None:
                 # 다다음이 None이 아니다 == 다음이 있다.
                 s += ' -> '
-            return s 
+        return s 
 
     def getLength(self):
         return self.nodeCount
@@ -128,7 +128,7 @@ class DoublyLinkedList:
         return True 
 
     def insertAt(self, pos, newNode):
-        if 1 < pos and pos > self.nodeCount :
+        if pos < 1 and pos > self.nodeCount :
             return False
         # 양방향에서는 self.tail에서 바로뽑기의 예외를 버리고, getAt에서 알아서 뽑아오라고 통일시켰다.
         # - prev만 찾으면 insertAfter에서 prev-newNode-next로 처리하게 한다.
@@ -191,7 +191,7 @@ class DoublyLinkedList:
         self.tail.prev.next = L.head.next
         L.head.next.prev = self.tail.prev
 
-        # 붙혀졌다고 가정하고, 꼬리는 덮어쓴다. 같은 tail로서 dummynode는 고정일텐데, 그냥 꼬리 덮어쓰기
+        # 붙혀졌다고 가정하고, 꼬리는 덮어쓴다. 같은 tail로서 dummynode는 고정일텐데, 그냥 dummy 덮어쓰기
         self.tail = L.tail
         #  갯수, 그만큼+
         self.nodeCount += L.nodeCount

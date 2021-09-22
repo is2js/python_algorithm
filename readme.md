@@ -1,5 +1,7 @@
  - 📂(folder/)  📜 (.ipynb)   🐍(.py)
-
+ - cf) 기업 interview
+    - 21.09.08 : 03_silver_1316_그룹단어체커(interview)(sorted의데이터변환_find_연속된단어)
+    - 21.09.22 : doublylinkedlist의 __repr__ 작성시 "->" 챙기는 로직(단)다음것, 양) 다다음 것이 있을때 s+="->" )
 ### 알고리즘 레포지토리
  - 📜 concept01\~06 : 예제를 통한 알고리즘 6가지 분류 개념정리(프로그래머스, Codeit)
  - 📜 practice01\~06 : 예제를 통한 알고리즘 6가지 분류 Lv1~3 문제풀이(프로그래머스, Codeit)
@@ -9,8 +11,7 @@
      - 🐍 bronze부터 시작하는 시간초과된 boj(백준) 문제 풀이 및 고찰
  - 📂 99_기타구현_코드만 : concept06_etc(기타구현)의 주제별 코드부분만 정리하는 폴더
      - 🐍 concept06_etc(기타구현)의 코드부분만 정리한 py파일
- 
- ![image-20210909211235458](https://raw.githubusercontent.com/is3js/screenshots/main/image-20210909211235458.png)
+         ![image-20210922174008797](https://raw.githubusercontent.com/is3js/screenshots/main/image-20210922174008797.png)
  
  - 처음 계획은 6가지 알고리즘 패러다임 및 기타 분류별로 정리한 예제를 노트북에 풀어놓는 것입니다.
      1. `정렬과 탐색` : 선형/이진탐색 + 선택/삽입정렬 
@@ -19,7 +20,7 @@
      4. `Dynamic Programming` : 부분문제 + 중복되는 문제를 memo(dict, 부분문제 없이 넣고 저장) or tabulation(list, base index 넣어놓고 처음부터, 부분문제가 list[k-1] 등)로 해결하기
      5. `Greedy Algorithm` : 부분문제 + 각 부분이 최대값을 선택했을 때가 정답
      6. `기타` 등 구현 : 기초 개념 및 한번에 생각하기 어려웠운, 배경지식이 필요한 개념.
-        - 소수 판별(isPrime2) / 소수 카운팅(에라토스테네스의 체) countPrimes2, findPrimes / 소인수분해 factorize2, 중복제거 소인수 모음 findFactors / 공통 소인수 commonFactors -> gcd2 공통소인수들의 누적곱/ math.gcd와 최소공배수 lcm, lcmFromTo /
+        - 소수 판별(isPrime2) / 소수 카운팅(에라토스테네스의 체) countPrimes2, findPrimes / 소인수분해 factorize2, 중복제거 소인수 모음 findFactors / 공통 소인수 commonFactors -> gcd2 공통소인수들의 누적곱/ math.gcd와 최소공배수 lcm, lcmFromTo / 달력만들기 - 윤년판단(for2월일수) leapyear, 이번달의 일수 daysOfMonth, 해당월 1일의 요일=시작요일 dayOfTheWeek, 전체달력출력 printCalendar / 
 
 ### Big-O of n 알고리즘 (나올때마다 기록해두기)
  - 이진탐색 : log(n)
