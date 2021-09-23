@@ -52,7 +52,7 @@ for _ in range(1000):
     d+=1
     if is_invalid_day(y,m,d):
         m+=1
-        d=1
+        day=1
         if m>12:
             y+=1
             m=1
@@ -68,16 +68,91 @@ import datetime
 
 
 #### 달력 만들기
-# 1. 해당 년-월에 -> 모두 몇일인지?
+# 1. 해당 년-월에 -> 이번달은 몇일인지?
 # 2. 시작하는 1일의 요일 -> 무슨 요일에 시작하는지? 
 # - 로직에서는 2가지를 알아야한다.
 # - 일월활수목금토 순으로 출력하며, 한글은 2칸을 차지 + 좌우공백 / 숫자가 10이하라면 1칸을 차히자므로 왼쪽2칸공백+숫자+우공백1 => 하루당 각 4칸씩 차지하게 작성한다.
+# 1
+year = 2021
+month = 9
+def leapyear(year):
+    return (year%4==0 and year%100!=0) or year%400==0
+print("1. leapyear(year) >>> ", leapyear(year))
+
+def daysOfMonth(year, month):
+    numOfDays = 31
+    if month in [4,6,9,11]:
+        numOfDays = 30
+    elif month == 2:
+        if leapyear(year):
+            numOfDays = 29
+        else:
+            numOfDays = 28
+    return numOfDays
+
+print("2. daysOfMonth(year, month) >>> ", daysOfMonth(year, month))
+
+
 
 year = 2021
 month = 9
 
-day_of_week = 3 # 일월화수 0123  3부터 시작한다. 정사각형보다 +3칸 전진해서 시작하면... 나중에 7의배수에 넘어가는 것을 조금 덜가고 넘어가게 된다.
+# 일월화수 0123  3부터 시작한다. 정사각형보다 +3칸 전진해서 시작하면... 
+# 1) 전진횟수만큼 공백을 채우고 1이 시작되도록 출력한다.
+# 2) 나중에 7의배수에 넘어가는 것을 조금 덜가고 넘어가게 된다.
+
+day_of_week = 3 
+
 weekdays = list("일월화수목금토")
 
-print(f"{year}년 {month}월")
+print(f"{year}년 {month}월: ")
+for day in weekdays: # 일월화수목금토 출력
+    print(" "+day, end=" ")
+print() # end =" "로 끝난 친구들다음에는 줄바꿀꺼면 넣어줘야함.
+for _ in range(day_of_week): # 시작요일 전까지..전진횟수만큼 4칸씩 공백채우기
+    print(" "*3, end=" ")
 
+days_of_month = daysOfMonth(year, month)
+for day in range(1, days_of_month + 1):
+    if day < 10:
+        print(" "*2 + str(day), end=" ")
+    else:
+        print(" "*1 + str(day), end= " ")
+
+    if (day+day_of_week)%7==0:
+        print()
+    
+print()
+
+def dayOfWeek(y, m, day=1):
+    t1 = y - (14-m)//12
+    t2 = t1 + (t1//4) - (t1//100) + (t1//400)
+    t3 = m + 12 * ((14-m) //12 ) -2 
+    return (d + t2 + (31*t3 //12)) % 7
+print("3. [암기]dayOfWeek(year, month, day=1) >>> ", dayOfWeek(year, month, day=1))
+
+
+##### 다모은 달력
+def printCalendar(year, month):
+    day_of_week = dayOfWeek(year, month, day=1)
+    days_of_month = daysOfMonth(year, month)
+    weekdays = list("일월화수목금토")
+
+    print(f"{year}년 {month}월:")
+    for day in weekdays:
+        print(" "+str(day), end=" ")
+    print()
+    
+    for _ in range(day_of_week):
+        print(' '*3, end=" ")
+
+    for day in range(1, days_of_month+1):
+        if day<10:
+            print('  ' +str(day), end=' ')
+        else:
+            print(' ' +str(day), end=' ')
+        if (day + day_of_week)%7==0:
+            print()
+    print()
+
+print("4. printCalendar(year, month) >>> ", printCalendar(2021,9))
