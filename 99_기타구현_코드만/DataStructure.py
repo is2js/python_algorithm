@@ -1,9 +1,9 @@
+############## 양방향 연결 리스트
 class Node:
     def __init__(self, item):
         self.data = item 
         self.prev = None
         self.next = None
-
 
 class DoublyLinkedList:
     def __init__(self):
@@ -198,3 +198,58 @@ class DoublyLinkedList:
 
 
     
+############## Stack 2개
+class ArrayStack:
+
+    def __init__(self):
+        self.data = []
+
+    def size(self):
+        return len(self.data)
+
+    def isEmpty(self):
+        return self.size(self) == 0
+
+    def push(self, item):
+        self.data.append(item)
+
+    def pop(self):
+        return self.data.pop()
+
+    def peek(self):
+        return self.data[-1]
+
+
+
+class LinkedListStack:
+
+    def __init__(self):
+        self.data = DoublyLinkedList()
+
+    def size(self):
+        return self.data.getLength()
+
+    def isEmpty(self):
+        return self.size() == 0 
+
+    def push(self, item):
+        # array(list)의 append()와 달리, 
+        # 1) 노드 속에 넣은 뒤 2) insertAt n+1자리
+        node = Node(item)
+        self.data.insertAt( self.size()+1, node)
+
+    def pop(self):
+        return self.data.popAt(self.size())
+
+    # dll의 popAt -> popAfter -> curr(node).data까지 가서 return한다.
+    # 하지만 getAt -> 다른데서 prev node얻을려는 메서드로서 -> curr의 node까지 만 return하니, 실제데이터 보려면 .data까지
+    def peek(self):
+        return self.data.getAt(self.size()).data
+
+
+
+    
+
+
+    
+        

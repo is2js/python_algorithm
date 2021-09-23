@@ -1,7 +1,10 @@
  - 📂(folder/)  📜 (.ipynb)   🐍(.py)
- - cf) 기업 interview
-    - 21.09.08 : 03_silver_1316_그룹단어체커(interview)(sorted의데이터변환_find_연속된단어)
-    - 21.09.22 : doublylinkedlist의 __repr__ 작성시 "->" 챙기는 로직(단)다음것, 양) 다다음 것이 있을때 s+="->" )
+ - cf) 기업 interview: 비슷한 알고리즘 본 적 있나요??
+    - 21.09.08 : 03_silver_1316_그룹단어체커(interview)(sorted의 데이터 변환_find_연속된단어)에서 string.find를 이용하여 튀는 index를 찾는 경우?
+    - 21.09.22 : doublylinkedlist의 __repr__ 작성시 "->" 챙기는 로직(단)다음것, 양) 다다음 것이 있을때 s+="->" )로 화살표를 출력하는 것 ex> Drug
+ - 작업환경 : `wsl2`, `vscode`
+    ![image-20210922174008797](https://raw.githubusercontent.com/is3js/screenshots/main/image-20210922174008797.png)
+
 ### 알고리즘 레포지토리
  - 📜 concept01\~06 : 예제를 통한 알고리즘 6가지 분류 개념정리(프로그래머스, Codeit)
  - 📜 practice01\~06 : 예제를 통한 알고리즘 6가지 분류 Lv1~3 문제풀이(프로그래머스, Codeit)
@@ -11,7 +14,7 @@
      - 🐍 bronze부터 시작하는 시간초과된 boj(백준) 문제 풀이 및 고찰
  - 📂 99_기타구현_코드만 : concept06_etc(기타구현)의 주제별 코드부분만 정리하는 폴더
      - 🐍 concept06_etc(기타구현)의 코드부분만 정리한 py파일
-         ![image-20210922174008797](https://raw.githubusercontent.com/is3js/screenshots/main/image-20210922174008797.png)
+
  
  - 처음 계획은 6가지 알고리즘 패러다임 및 기타 분류별로 정리한 예제를 노트북에 풀어놓는 것입니다.
      1. `정렬과 탐색` : 선형/이진탐색 + 선택/삽입정렬 
@@ -90,10 +93,13 @@
  -> value의 중복검사는 if해당범위<= and <= count+= 한 뒤, 범위구간 = 갯수시 중복X , 이진탐색으로 줄여나간다.
  -> 부분문제로 나눌시 탐색범위가 끝만 조정되는게 아니라, 앞뒤가 조정되는 경우, start, end 둘다 받는다.
 
-3. [최적의 부분문제]를 구성한 배반의 부분문제들이 내려가면서 중복되는지 확인한다. -> Dynamic(Memo or Tabul or Tabul공간최적화)
- -> n-1 + n-2등으로 풀리는 부부문제의 경우는 거의 중복된다. 참고로 n//2 의 mid활용, merge_sort 등에서 input의 길이로 부분문제를 만드는 경우에는 중복이 없을 수도 있다.
+3. [최적의 부분문제]를 구성한 배반의 [부분문제들이 내려가면서 중복]되는지 확인한다. -> Dynamic(Memo or Tabul or Tabul공간최적화)
+ -> n-1 + n-2등으로 풀리는 부분문제의 경우는 거의 중복된다. 참고로 n//2 의 mid활용, merge_sort 등에서 input의 길이로 부분문제를 만드는 경우에는 중복이 없을 수도 있다.
+ --> n-1, n-2등의 촘촘한, 다 알아야하는 것은 tabulation -> 공간최적화
+ --> n//2, k와 n-k의 부분문제 -> cache를 쓰는 memoization
  -> tabulation(부분문제를 list[k-1], list[k-2]로 품)으로 풀거면, base case를 list의 0, 1에 미리 채워놓고, n단계에서 뽑아서 부분해결한 상태로 가정해서 conquer해주면 된다. 문제는.. n번째 구할떄.. 첨부터 n까지 채워야함 -> 공간 최적화해야함. -> 초기항 확인후, 몇번반복해야할지 초기항~n항으로 판단.
- -> memoization(부분문제가 없음)은 재귀함수가 <cache(dict)>를 인자로 받으며, recursive case에서는 cache에 있는경우부터 먼저 확인하여 있으면 return하고 당시 함수를 종료시켜야함. 없는경우 나눠서 계산한다. default값 없이 시작 + for  if key에있으면 return 없으면 =True 넣기. if에서 해결로직이 완성되었다. 
+ -> memoization(부분문제가 없음)은 재귀함수가 cache(dict)를 인자로 받으며, recursive case에서는 cache에 있는경우부터 먼저 확인하여 있으면 return하고 당시 함수를 종료시켜야함. 없는경우 나눠서 계산한다. default값 없이 시작 + for  if key에있으면 return 없으면 =True 넣기. if에서 해결로직이 완성되었다. 
+ --> base에서도 cache사용, recursive에서 나누기전에 cache확인, 없으면 부분문제 해결후, cache저장후 종료.
  -> 자료형의 index탐색이 아닌, value값의 범위를 탐색할 때도, start,end의 인자가 필요하다. 특히 이진탐색의 mid활용시 부분문제conquer시 활용을 위해 원래함수에 인자로 존재해야함. 
     - <value탐색>은 이진의 절반 탐색이라도... index가 아니므로  <모든 요소를 돌면서> if 범위로 판단한다. ex> count=0 <모든 요소 for돌면서> if절반범위 count+=1
     - 또한, <value탐색>은 list는 그대로 두고, value의 범위만 바뀐체 탐색을 이어나간다. ex> 중복검사 자체를 list전체돌기 + value만의 범위만 바꿔서 탐색하기 때문에 
