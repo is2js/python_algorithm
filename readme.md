@@ -3,7 +3,8 @@
     - 21.09.08 : 03_silver_1316_그룹단어체커(interview)(sorted의 데이터 변환_find_연속된단어)에서 string.find를 이용하여 튀는 index를 찾는 경우?
     - 21.09.22 : doublylinkedlist의 __repr__ 작성시 "->" 챙기는 로직(단)다음것, 양) 다다음 것이 있을때 s+="->" )로 화살표를 출력하는 것 ex> Drug
  - 작업환경 : `wsl2`, `vscode`
-    ![image-20210922174008797](https://raw.githubusercontent.com/is3js/screenshots/main/image-20210922174008797.png)
+    ![image-20210924073210862](https://raw.githubusercontent.com/is3js/screenshots/main/image-20210924073210862.png)
+
 
 ### 알고리즘 레포지토리
  - 📜 concept01\~06 : 예제를 통한 알고리즘 6가지 분류 개념정리(프로그래머스, Codeit)
