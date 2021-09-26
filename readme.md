@@ -1,4 +1,3 @@
- - 📂(folder/)  📜 (.ipynb)   🐍(.py)
  - cf) 기업 interview: 비슷한 알고리즘 본 적 있나요??
     - 21.09.08 : 03_silver_1316_그룹단어체커(interview)(sorted의 데이터 변환_find_연속된단어)에서 string.find를 이용하여 튀는 index를 찾는 경우?
     - 21.09.22 : doublylinkedlist의 __repr__ 작성시 "->" 챙기는 로직(단)다음것, 양) 다다음 것이 있을때 s+="->" )로 화살표를 출력하는 것 ex> Drug
@@ -6,7 +5,7 @@
     ![image-20210924073210862](https://raw.githubusercontent.com/is3js/screenshots/main/image-20210924073210862.png)
 
 
-### 알고리즘 레포지토리
+### 알고리즘 레포지토리 📂(folder/)  📜 (.ipynb)   🐍(.py)
  - 📜 concept01\~06 : 예제를 통한 알고리즘 6가지 분류 개념정리(프로그래머스, Codeit)
  - 📜 practice01\~06 : 예제를 통한 알고리즘 6가지 분류 Lv1~3 문제풀이(프로그래머스, Codeit)
  - 📂 01_codeup
@@ -97,6 +96,7 @@
 3. [최적의 부분문제]를 구성한 배반의 [부분문제들이 내려가면서 중복]되는지 확인한다. -> Dynamic(Memo or Tabul or Tabul공간최적화)
  -> n-1 + n-2등으로 풀리는 부분문제의 경우는 거의 중복된다. 참고로 n//2 의 mid활용, merge_sort 등에서 input의 길이로 부분문제를 만드는 경우에는 중복이 없을 수도 있다.
  --> n-1, n-2등의 촘촘한, 다 알아야하는 것은 tabulation -> 공간최적화
+ --> tabulation의 문제들(최소동전거슬, 계단올라가기)는 (N번째, [단위리스트])의 2가지 인자를 받는 것 같다.
  --> n//2, k와 n-k의 부분문제 -> cache를 쓰는 memoization
  -> tabulation(부분문제를 list[k-1], list[k-2]로 품)으로 풀거면, base case를 list의 0, 1에 미리 채워놓고, n단계에서 뽑아서 부분해결한 상태로 가정해서 conquer해주면 된다. 문제는.. n번째 구할떄.. 첨부터 n까지 채워야함 -> 공간 최적화해야함. -> 초기항 확인후, 몇번반복해야할지 초기항~n항으로 판단.
  -> memoization(부분문제가 없음)은 재귀함수가 cache(dict)를 인자로 받으며, recursive case에서는 cache에 있는경우부터 먼저 확인하여 있으면 return하고 당시 함수를 종료시켜야함. 없는경우 나눠서 계산한다. default값 없이 시작 + for  if key에있으면 return 없으면 =True 넣기. if에서 해결로직이 완성되었다. 
@@ -107,6 +107,7 @@
  -> 이진 탐색으로 푸는 부분문제는 if 발견시 return왼쪽 / 아니면 return오른쪽 으로 해결한다.
 
 4. 조건별 부분1 + 2 + 3으로 나눈 것 중 배반문제가 아니라 [최대/최소 등 특정조건 1개 선택]이 답인지 확인한다. 조건 중에 최대값을 선택 + 그때의 부분문제가 원래 문제의 답인지 [Greedy algorithm]을 판단해서 푼다.
+ --> greedy는 문제에서 주어지는 것이 memo나 tabul과 비슷하게 (N,[단위리스트])형태지만, N이 범주형(N번째 등)가 아니라 숫자형(value)일 수 있으며, (value, [단위리스트])가 부분문제로 안나눠질 수 있다. 그럴 땐 탐욕적 속성이 풀리도록 update해서 풀어버린다. update과정에서 value가 unit_list(역순정렬, greedy)에 의해 기하급수적으로 쪼개진다.
  -> - greedy는 재귀의 base/recursive는 사라지고 sorted( , reverse=True) or max(부분1, 부분2)로  부분문제 조건최대 택1의 일반 문제다. 직전까지의변수+for+현재항으로변수없뎃
  -> 직전이 있어야하므로, 값에 [0]값을 넣고 시작은 range(1,)부터 하는 sense
 
