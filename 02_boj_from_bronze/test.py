@@ -10,15 +10,7 @@ sys.stdin = open("./input.txt", "rt")
 ######################################################
 N = int(input())
 
-if N == 1:
-    x = '666'
+data = [ int(input()) for _ in range(N)]
+for x in sorted(data):
+    print(x)
 
-elif N<=6 : # 5666 
-    x = str(N-1) + '666'
-elif 7<=N<7+9:
-    x = '666'+str(N-6)
-elif 16<= N < 16+5:
-    x = str(N-1)+
-
-
-print(x)
