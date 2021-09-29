@@ -253,3 +253,82 @@ class LinkedListStack:
 
     
         
+
+
+#### ArrayStack 1-1: 괄호 유효성 검사
+#expr = "([ㅋㅋㅋㅇㄹ{ㄴㅇㄹ}ㄴㅁㅇㄹ]ㅁㄴㅇ)"
+def 괄호_유효성_검사(expr):
+    match = {
+        ')' : '(',
+        '}' : '{',
+        ']' : '[',
+    }
+
+    S = ArrayStack()
+
+    for c in expr:
+        if c in '({[':
+            S.push(c)
+
+        elif c in match:
+            if S.isEmpty():
+                return False
+            else:
+                t = S.pop()
+                if t != match.get(c):
+                    return False
+                    
+    return S.isEmpty()
+
+
+#### ArrayStack 1-2: 중위->후위표기식 변환
+# S='A*(B+C)'
+def 중위_To_후위(S):
+    prec = {
+        '*':3,'/':3,
+        '+':2, '-':2,
+        '(':1, 
+    }
+
+
+    opStack = ArrayStack()
+
+    answer = ''
+
+
+    for s in S:
+        # 1. 여는괄호만나기
+        if s == '(':
+            opStack.push(s)
+        # 2. 그외 연산자 만나기
+        elif s in prec:
+            if opStack.isEmpty():
+                opStack.push(s)
+            else:
+                # stack에 연산자가 차있는 상황이라면, 계속 비교판단해야한다.
+                # 그게.. 경우에 따라, 
+                # 1) 우선순위 높은놈이 peek push되있다? pop&출력 후 -> **그 다음 peek과 비교하는 if루프반복 ->while**
+                while not opStack.isEmpty():
+                    if prec[opStack.peek()]  >= prec[s]:
+                        answer += opStack.pop() 
+                # 2) 우선순위 낮은놈이 peek push되있다? 빌때까지?ㄴㄴ break로 빠져나와서, 날 peek으로 push해주면 됨. (내가 수식마지막이라서 pop&출력검사는 맨 나중에 한번 더 함.)
+                    else: break
+                opStack.push(s)
+        # 3. 닫는 괄호만나기
+        elif s == ')':
+            # peek로 여는 괄호가 나올때까지 모두 pop()~ 없애주도록 update
+            while opStack.peek() != '(':
+                answer+=opStack.pop() 
+            # while특성상 현재 peek ( 여는 괄호 상태다.-> 괄호는 pop으로 날린다.
+            opStack.pop()
+        # 4. 이제 나머지 피연산자들(숫자 혹은 ABCD)
+        # -> 나올때마다 출력만.
+        else:
+            answer+=s
+
+
+    # 5. 스택(연산자push)에 남아있는 것은 없는지 확인해서 다 pop & 출력
+    while not opStack.isEmpty():
+        answer += opStack.pop()
+
+    return answer
