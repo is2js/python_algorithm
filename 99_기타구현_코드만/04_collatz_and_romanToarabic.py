@@ -46,8 +46,29 @@ for i in range(1, 10000+1):
         max_len = curr_len
         max_N = i
 
-
 print(max_len, max_N)
 
+
+
+def toArabiNumber(roman):
+    romanDict = {
+        'M' : 1000,
+        'D' : 500,
+        'C' : 100,
+        'L' : 50,
+        'X' : 10,
+        'V' : 5,
+        'I' : 1,
+    }
+    arabic = 0
+    for i in range(len(roman)):
+        # i+1(다음항)과 비교할 때는, 조건을 먼저 달아주자. 맨 마지막index(n-1) 의 다음은 없으니 그 미만으로
+        if (i < len(roman)-1) and romanDict[roman[i]] < romanDict[roman[i+1]]  :
+            arabic -= romanDict[roman[i]]
+        else:  
+            arabic += romanDict[roman[i]] 
+
+    return arabic
+print("5. 로마숫자(문자)를 아라비아 숫자로 변환 toArabiNumber('CCLXIX') >>>", toArabiNumber('CCLXIX'))
 
 

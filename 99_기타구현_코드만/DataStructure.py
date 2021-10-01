@@ -1,5 +1,6 @@
 ############## 양방향 연결 리스트
 class Node:
+    # Node는 item과, 화살표 2개(link)를 가진다.
     def __init__(self, item):
         self.data = item 
         self.prev = None
@@ -7,15 +8,18 @@ class Node:
 
 class DoublyLinkedList:
     def __init__(self):
-        # list생성시에는  외부data없이, count,head,tail 만 생성
+        # list생성시에는  외부data없이, count, head Node ,tail Node 만 생성
         self.nodeCount = 0
 
-        self.head = Node(None)
-        self.tail = Node(None)
+        self.head=Node(None)
+        self.tail=Node(None)
+        
+        self.head.next = self.tail
         self.head.prev = None
-        self.head.next = self.tail 
+        
+        self.tail.next = None
         self.tail.prev = self.head
-        self.tail.next = None 
+
 
     def __repr__(self):
         # 출력시... 비었다면? 비었다고 메세지후 종료
@@ -128,7 +132,7 @@ class DoublyLinkedList:
         return True 
 
     def insertAt(self, pos, newNode):
-        if pos < 1 and pos > self.nodeCount :
+        if pos < 1 and pos > self.nodeCount +1 :
             return False
         # 양방향에서는 self.tail에서 바로뽑기의 예외를 버리고, getAt에서 알아서 뽑아오라고 통일시켰다.
         # - prev만 찾으면 insertAfter에서 prev-newNode-next로 처리하게 한다.
@@ -162,6 +166,7 @@ class DoublyLinkedList:
 
     # 삭제는 newNode없이 pos만들어오며, prev를 뽑아 넘기는 것이 똑같다.
     def popAt(self, pos):
+        # get 0~n, insert 1~n+1, pop 1~n
         if pos < 1 or pos > self.nodeCount:
             raise IndexError('Index out of range')
 
@@ -188,12 +193,16 @@ class DoublyLinkedList:
         #              뒤쪽L이 비어서(None-head-tail-None) tail dummy node여도 그냥 대입하자.
         #              **왜냐면,, 마지막실Node는 concat하기전에도 tail dummy node를 가리키고 있었기 때문**
         # **앞쪽(self) 맨마지막실Node(tail.prev)와,  뒤쪽(L) 맨앞의 실Node(head.next)의 화살표 교환식이라 생각하자.**
+
+        # 1) 즉, 앞의 마지막실Node와 뒤 맨앞실Node를 서로 바라보게 연결함.
         self.tail.prev.next = L.head.next
         L.head.next.prev = self.tail.prev
-
+        
+        #  2) 꼬리 덮어씀.
         # 붙혀졌다고 가정하고, 꼬리는 덮어쓴다. 같은 tail로서 dummynode는 고정일텐데, 그냥 dummy 덮어쓰기
+        # .tail 자체가.. 화살표..역할..
         self.tail = L.tail
-        #  갯수, 그만큼+
+        # 3)  갯수, 그만큼+
         self.nodeCount += L.nodeCount
 
 
@@ -332,3 +341,162 @@ def 중위_To_후위(S):
         answer += opStack.pop()
 
     return answer
+
+
+#### ArrayStack 1-3: 중위--splitTokens--> 토큰리스트 --ArrayStack->후위표기식(토큰리스트) 변환 후--ArrayStack-->후위표기식 계산
+# def solution(expr):
+#     tokens = splitTokens(expr)
+#     postfix = infixToPostfix(tokens)
+#     val = postfixEval(postfix)
+#     return val
+
+def splitTokens(exprStr):
+    tokens = []
+
+    val = 0 # 직전까지 문자열->10진수 변환값. by <<누적되면서 update변환됨>> 
+    valProcessing = False # update시작->끝을 알려주는 변수 # 직전까지의 숫자update여부 (매번 업데이트해줌)
+
+    for c in exprStr:
+        # 스페이스는 무시(건너띄기)하기위해 , 맨위쪽에 if continue처리
+        if c == ' ':
+            continue
+        if c in '1234567890':
+            # 숫자를 만난 순간부터, 다음것과 연계하여 업데이트된다. 문자열숫자를 10진수 int로 update하는 과정이다.
+            # 일단 flag부터 켜준다. 다음이 숫자가 아닐 때, [update끝내고 마무리 ]알려줘야한다.
+            valProcessing=True  # 해당과정일 땐, 항상 True를 넣어준다. 아닐때 False로 한번 바뀐다.
+            # 직전까지의 -> 현재까지의 수로 update
+            val = val*10 + int(c)
+        
+        else:
+            # [숫자가 아닌 곳에 왔을 때,]
+            # << 직전까지의 숫자update여부(flag) >> 를 확인해서.. , [숫자계산을 마무리해준다.]
+            if valProcessing:
+                # 직전까지 숫자였구나.. 이제 아니란다. 마무리하자. # 숫자는 update과정이 끝나고나서야.. append해준다.
+                tokens.append(val)
+                val=0
+            valProcessing=False # 언제바뀔지모르니, 매번 업데이트해준다.  숫자가 아니라면, 아니라고 매번 적어줘야한다.
+
+            tokens.append(c) # 숫자update가 아닐 경우, 바로바로 토큰으로 넣어준다.
+
+    # [숫자가 아닌곳이 아닌.. 바로 끝나는 경우]
+    if valProcessing:
+        # 숫자update로 끝났다? (후위식은 안그럴듯?) -> 마무리를 따로해주자.
+        tokens.append(val)
+        # val = 0초기화해줄필요는 없다.
+    return tokens
+
+
+def infixToPostfix(tokenList):
+    # 우선순위: 여는 괄호는, 닫힌괄호만날때까지 stack에 있을 수 있게 우선순위를 연산자들에 비해 제일 낮게 준다.
+    # -> 대신 만나는 순간, [비교없이] 바로 들어가도록 if문을 제일 위에 선언해준다.
+    # 닫는 괄호는 딱히 연산자로서 취급안한다. 만나는 순간 다 빼오는 특이한놈이다.
+    prec = {
+        '*': 3,
+        '/': 3,
+        '+': 2,
+        '-': 2,
+        '(': 1,
+    }
+
+    postfixList = []
+
+    opStack = ArrayStack()
+
+    for s in tokenList:
+        if s == '(':
+            opStack.push(s)
+        
+        # 우선순위가 있는 연산자들이 들어올 경우, stack에 담거나 비교가 필요함.
+        elif s in prec:
+            if opStack.isEmpty():
+                opStack.push(s)
+
+            else:
+                while not opStack.isEmpty():
+                    if prec[opStack.peek()] >= prec[s]:
+                        postfixList.append(opStack.pop())
+                    else: break 
+
+                opStack.push(s) # 높은걸만나서 다 빠지고 맨마지막에 push or 내가 높아서 바로 push
+            
+        elif s == ')':
+            while opStack.peek() != '(':
+                postfixList.append(opStack.pop())
+            # 열린괄호를 peek에 가져서 while을 빠져나온 상태에서 -> 열린괄호 날리기
+            opStack.pop()
+
+        else:
+            postfixList.append(s)
+
+    # tokenList를 다돌앗는데, stack에 먼가(연산자가) 남아있따면.. 빼서 넣어주기
+    # - 비어서 push된체로 끝났거나 or 비교후 push된 상태로 끝
+    while not opStack.isEmpty():
+        postfixList.append(opStack.pop())
+
+    return postfixList
+
+
+# new : 후위 표기식(토큰리스트)을 Arraystack으로 계산하기
+# - 연산자들, 여는괄호를 push(중위to후위)하는게 아니라, 피연산자들을 push하면서 연산자 등장시 계산함.
+# **계산에 있어서는, 연산자들의 서로간 우선순위보다는, <<피연산자들의 들어간 순서 및 들어간 순서대로 최근 2개 (계산후에도 피연산자취급하여 push된) >> 가 중요하다. **
+def postfixEval(postfix_tokenList):
+    Stack = ArrayStack()
+
+    for token in postfix_tokenList:
+        # 숫자 = 피연산자 -> 일단 push
+        if type(token) is int:
+            Stack.push(token)
+
+        # 숫자가 아닌 연산자들 -> 종류에 맞게 연산 with pop1,pop2 하여 결과물을 다시 피연산자로서 push
+        else:
+            b = Stack.pop()
+            a = Stack.pop()
+
+            if token == '+':
+                Stack.push(a + b)
+            elif token == '-':
+                Stack.push(a - b)
+            elif token == '*':
+                Stack.push(a * b)
+            elif token == '/':
+                Stack.push(a / b)
+
+    # 결국엔 연산하여 결과물 1개값만 남게됨.
+    return Stack.pop()
+
+def solution(expr):
+    tokens = splitTokens(expr)
+    postfix = infixToPostfix(tokens)
+    val = postfixEval(postfix)
+    return val
+
+
+
+
+#### ArrayQueue : dequeue연산 때문에 array(list)로 만든 queue는 비추
+class ArrayQueue:
+
+    def __init__(self):
+        self.data = []
+
+    def size(self):
+        return len(self.data)
+
+    def isEmtpy(self):
+        return self.size() == 0 
+
+    def enqueue(self, item):
+        self.data.append(item)
+
+    def dequeue(self):
+        return self.data.pop(0)
+
+    def peek(self):
+        return self.data[0] 
+
+
+
+
+
+
+
