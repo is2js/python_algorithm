@@ -1,4 +1,5 @@
- - cf) 기업 interview: 비슷한 알고리즘 본 적 있나요??
+### 레포지토리 생성 목적
+ - cf) 기업 interview: 비슷한 알고리즘 본 적 있나요??의 질문을 받은 뒤, 대기업 코딩테스트 수준까지 역량을 끌어올리기 위해 공부 기록을 정리함.
     - 21.09.08 : 03_silver_1316_그룹단어체커(interview)(sorted의 데이터 변환_find_연속된단어)에서 string.find를 이용하여 튀는 index를 찾는 경우?
     - 21.09.22 : doublylinkedlist의 __repr__ 작성시 "->" 챙기는 로직(단)다음것, 양) 다다음 것이 있을때 s+="->" )로 화살표를 출력하는 것 ex> Drug
  - 작업환경 : `wsl2`, `vscode`
@@ -7,26 +8,27 @@
 
 ### 알고리즘 레포지토리 📂(folder/)  📜 (.ipynb)   🐍(.py)
  - 📂 01_codeup: 🐍 기초 100제 중 마지막 배열문제들(6092\~6098)
- - 📂 02_boj: 🐍 bronze부터 시작하는 시간초과된 boj(백준) 문제 풀이 및 고찰
+ - 📂 02_boj: 🐍 백준 단계별 문제풀기 12단계까지 문제 중 시간초과 or 틀린 문제 풀이 및 고찰
  - 📂 99_기타구현_코드만: 🐍 concept06_etc(기타구현)의 코드부분만 정리한 py파일
- - 📜 concept01\~07 : 예제를 통한 알고리즘 분류별 개념정리(프로그래머스, Codeit)
- - 📜 practice01\~07 : 예제를 통한 알고리즘 분류별 Lv1~3 문제풀이(프로그래머스, Codeit)
+ - 📜 concept01\~06 : 예제를 통한 알고리즘 분류별 개념정리(프로그래머스, Codeit)
+ - 📜 practice01\~06 : 예제를 통한 알고리즘 분류별 Lv1~3 문제풀이(프로그래머스, Codeit)
  
- - 알고리즘 패러다임(2~5) 및 기타 분류별(6~7)로 정리한 예제를 노트북 목록 소개
-     1. `정렬과 탐색` : 선형/이진탐색 + 선택/삽입정렬 
-     2. `Brute Force` : 전체 다 살펴보는 방식의 문제
-     3. `Divide and Conquer` : 재귀 등 부분문제가 있는 살펴보기
-     4. `Dynamic Programming` : 부분문제 + 중복되는 문제를 memo(dict, 부분문제 없이 넣고 저장) or tabulation(list, base index 넣어놓고 처음부터, 부분문제가 list[k-1] 등)로 해결하기
-     5. `Greedy Algorithm` : 부분문제 + 각 부분이 최대값을 선택했을 때가 정답
-     6. `기타` 등 구현 : 배경지식이 필요한 개념.
-        - 소수 판별(isPrime2) / 소수 카운팅(에라토스테네스의 체) countPrimes2, findPrimes / 소인수분해 factorize2, 중복제거 소인수 모음 findFactors / 공통 소인수 commonFactors -> gcd2 공통소인수들의 누적곱/ math.gcd와 최소공배수 lcm, lcmFromTo / 달력만들기 - 윤년판단(for2월일수) leapyear, 이번달의 일수 daysOfMonth, 해당월 1일의 요일=시작요일 dayOfTheWeek, 전체달력출력 printCalendar / 
-     7. `추가 기타` 구현 : 콜라츠의 추측 collatz(n) / 로마숫자를 아라비아 숫자로 toArabicNumber / 아라비아숫자를 로마숫자로 romanNumber1,2,3 -> toRomanNumber(n) / 
+ - 알고리즘 패러다임(2\~5) 및 기타 분류별(6\~)로 정리한 예제를 노트북 목록 소개
+
+1. `정렬과 탐색` : 선형/이진탐색 + 선택/삽입정렬 
+2. `Brute Force` : 전체 다 살펴보는 방식의 문제
+3. `Divide and Conquer` : 재귀 등 부분문제가 있는 살펴보기
+4. `Dynamic Programming` : 부분문제 + 중복되는 문제를 memo(dict, 부분문제 없이 넣고 저장) or tabulation(list, base index 넣어놓고 처음부터, 부분문제가 list[k-1] 등)로 해결하기
+5. `Greedy Algorithm` : 부분문제 + 각 부분이 최대값을 선택했을 때가 정답
+6. `기타` 등 구현 : 배경지식이 필요한 개념.
+   - 소수 판별(isPrime2) / 소수 카운팅(에라토스테네스의 체) countPrimes2, findPrimes / 소인수분해 factorize2, 중복제거 소인수 모음 findFactors / 공통 소인수 commonFactors -> gcd2 공통소인수들의 누적곱/ math.gcd와 최소공배수 lcm, lcmFromTo / 달력만들기 - 윤년판단(for2월일수) leapyear, 이번달의 일수 daysOfMonth, 해당월 1일의 요일=시작요일 dayOfTheWeek, 전체달력출력 printCalendar / 
+7. `추가 기타` 구현 : 콜라츠의 추측 collatz(n) / 로마숫자를 아라비아 숫자로 toArabicNumber / 아라비아숫자를 로마숫자로 toRomanNumber / 
 
 ### Big-O of n 알고리즘 (나올때마다 기록해두기)
  - 이진탐색 : log(n)
     - n의 start or end가 절반씩 줄거나 or 반복문의 index i *= 2 2배로 커지거나 or  n//2 로 절반씩 줌.
     - `str()` log(n)이지만, 자리수d로 표기하면 O(d)
- - 선형탐색 : n
+ - 선형탐색 : O(n)
     - x `in` sequence
     - slice
     - `max`, `min`
@@ -36,7 +38,6 @@
         - sort, sorted의 정렬 : nlogn
  - sort, sorted : n log(n)
     - for i  내부에 while j*=2  or  for i  while  i//2 j+=1
- - in : O(n)의 선형탐색
  - 합병정렬, 퀵정렬 : O(n log(n))
     - 삽입정렬, 거품정렬 : O(n^2)
  - 재귀 : (재귀인자 포함)재귀내부복잡도 \* 재귀1개당몇번호출(n-1이면 n번, n//2면 log(n)번) \*\*(함수내 재귀호출갯수)
@@ -46,7 +47,7 @@
  - [그외 정리 블로그](https://wayhome25.github.io/python/2017/06/14/time-complexity/)(초보몽키)
 
 
-### 정렬종류별 사용법
+### 정렬 종류별 사용법
 1. 선택정렬 : 간단한 아이디어지만 O(N^2)으로 안쓴다.
 2. 삽입정렬 : 데이터가 정렬된 상태라면, 빠르게 작동할 수도 있다. O(N^2)
 3. **퀵정렬 : 대부분의 경우에 적합하고 빠르다. O(NlgN)**
@@ -135,6 +136,14 @@
 
 
 ```
+
+### stack과 queue 구현시 자료구조
+- stack : list로 충분함(push, pop, peek이 **중간에 삽입/삭제가 없음. -> 하나씩 밀거나 당길일 없음.**)
+- **queue** : dequeue시 맨앞삭제시 한칸씩 앞으로 다 이동해야해서 -> linkedList로 제거후 link뗐다 붙혔다가 빠름.
+- 환형큐 : list로 충분함. 중간에 삽입/삭제도 **front,rear index가 움직이면서 알아서 처리함 -> 하나씩 밀거나 당길일 없음.**.
+- 우선순위큐 :  일반큐(dequeue로 인한 한칸씩밀어주기로 -> 양방향 연결리스트를 선호)와 enqueue만 다르다. 
+  - **enqueue**시에도 양방향 연결리스트로  정해진 우선순위 자리를 찾아가, 중간 삽입을 해준다.
+  - **그외 메소드들은 queue 와 동일하다.**
 
 
 ### 문제 소스

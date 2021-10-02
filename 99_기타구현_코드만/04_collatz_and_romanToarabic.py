@@ -50,6 +50,8 @@ print(max_len, max_N)
 
 
 
+
+#### 로마문자 -> 숫자
 def toArabiNumber(roman):
     romanDict = {
         'M' : 1000,
@@ -69,6 +71,32 @@ def toArabiNumber(roman):
             arabic += romanDict[roman[i]] 
 
     return arabic
-print("5. 로마숫자(문자)를 아라비아 숫자로 변환 toArabiNumber('CCLXIX') >>>", toArabiNumber('CCLXIX'))
+print("5. 로마숫자(문자)를 아라비아 숫자로 변환 toArabiNumber('CCLXIX')  >>>", toArabiNumber('CCLXIX'))
 
 
+#### 아라비아 숫자 -> 로마문자
+# 1) 큰 순서대로 단위 숫자보다 큰 경우, <<while로 단위보다 크거나 같은 동안은 반복해서>> 단위를 빼주면서 & 빈 문자열에 로마문자를 추가해준다.
+# 2) 단위숫자보다 큰 감산법 ~ 그 다음 큰 단위숫보다는 작은, if 감산법 적용 구간(4, 9, 40, 90 등)이 나오면, 감산법을 먼저 처리하고(예외처리, 4, 9, 40, 90), else인 경우 단위숫자만큼 제거하고 문자열 추가해주는 작업을 하도록 한다.
+# 3) 그렇게 만든 일자리, 10 ~99 , 100~ 변환함수들에서 패턴을 발견하여 종합한다.
+#  -> 여러 단위가 있을 경우, 큰 단위 순서대로 <먼저(동전 같은 경우 sorted(, reverse)해서) 가진 동안은 계속 제거해주는 sense>
+#  -> 종합시, 단위숫자 뿐만 아니라 감산법도 dict에 넣어서 예외처리와 단위숫자 제거를 같이하게한다.
+#  -> 감산법 예외숫자(4, 9, 40..)가 여러번 제하여지면 어떻하지? -> 이미 그것보다 약간 큰 단위에서 짜를 만큼 짤라서.. 안됨..100으로 여러번 잘라놓으니.. 90은 한번밖에 안됨.
+
+def toRomanNumber(n): 
+    romanDict2 = {
+        1:'I', 4:'IV',
+        5:'V', 9:'IX',
+        10:'X', 40:'XL',
+        50:'L', 90:'XC',
+        100:'C', 400:'CD',
+        500:'D', 900:'CM',
+        1000:'M',
+    }
+    str_=""
+    for unit in sorted(romanDict2, reverse=True):
+        while n >= unit:
+            str_+=romanDict2[unit]
+            n-=unit 
+    return str_
+
+print("6. 아라비아 숫자를 로마숫자(문자)로 변환 toRomanNumber(269) >>>", toRomanNumber(269))

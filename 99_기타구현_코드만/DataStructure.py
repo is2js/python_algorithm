@@ -472,7 +472,7 @@ def solution(expr):
 
 
 
-
+#### 비추
 #### ArrayQueue : dequeue연산 때문에 array(list)로 만든 queue는 비추
 class ArrayQueue:
 
@@ -493,6 +493,131 @@ class ArrayQueue:
 
     def peek(self):
         return self.data[0] 
+
+#### 추천
+#### LinkedListQueue : dequeue시 pop(0)이 아닌 popAt(1)로서, 각 원소들이 한칸씩 이동할 필요없음.
+class LinkedListQueue:
+
+    def __init__(self):
+        self.data = DoublyLinkedList()
+
+    def size(self):
+        return self.data.getLength()
+
+    def isEmpty(self):
+        return self.size() == 0
+
+    def enqueue(self, item):
+        node = Node(item)
+        self.data.insertAt(self.size() + 1, node)
+
+    def dequeue(self):
+        # queue는 선입선출로 맨첫번째것(queue는 1부터)부터 뺀다.
+        # 알아서 popAt내부에서 node -> data까지 반환함.
+        return self.data.popAt(1)
+
+    def peek(self):
+        # getAt은 popAt과 달리, node내부 item까지 반환하진 않는다. prev node반환용 함수였다..
+        # -> 직접  data까지 반환
+        return self.data.getAt(1).data 
+
+
+#### 일반 queue은 dequeue땜시 DLL로 구현
+#### 원형 큐는 n수만 정해지면 선형을 연결해서 구현. dequeue시 밀어넣기 필요없어짐.
+#    직접 index(포인터)를 이동시키면서 처리함. -> dequeue시 front가 , enqueue시 rear가 -1부터 전진함.
+#    정해진 갯수를 가지므로 원형으로 돌아갈 때, 삽입시 확인을 위한 isFull()연산이 추가됨.
+class CircularQueue:
+
+    def __init__(self, n):
+        self.maxCount = n 
+        self.data = [None] * n
+        self.count = 0
+        self.front = -1
+        self.rear = -1 
+
+
+    def size(self):
+        return self.count
+    
+    def isEmpty(self):
+        return self.size() ==0 
+        #return self.count ==0 
+
+    # CircularQueue는 갯수제한이 있어, 가득찼는지 확인하고 넣어야한다.
+    def isFull(self):
+        return self.size() == self.maxCount
+        #return self.count == self.maxCount
+
+    def enqueue(self, x):
+        if self.isFull():
+            raise IndexError("Queue full")
+        # 1. rear부터 이동
+        # 삽입시에는 마지막index를 +1해주는 동시에, 전체길이 넘어갈 수 있으므로 나머지처리로 인한 초기화
+        self.rear = (self.rear+1) % self.maxCount
+        # 2. 이동한 rear자리에 데이터 삽입
+        self.data[self.rear] = x 
+        self.count += 1
+
+    def dequeue(self):
+        if self.isEmpty:
+            raise IndexError("Queue empty")
+        # front index도 rear처럼 사건발생시 전진만 하며 & 환형으로 돌려줘야한다.
+        # - 삭제된 값 자리로 뒤에것들이 한칸씩 당기는 것이 아니라, 다음삭제때가 시작되면, 다음 삭제될 value자리의 index로 오른족으로 한칸 옮겨줌. 나머지들이 안움직여도 알아서 삭제됨.
+        # [front][첫값][2번재값] ... 상태로 유지되었다가 움직임.
+        self.front = (self.front+1) % self.maxCount
+        x = self.data[self.front] # 값을 참조만하고 실제 지우진 않음(나중에 덮어쓰기함.)
+        self.count -= 1
+        return x 
+
+    # 빼는 것과 비슷한데, front를 실제 +1 옮기진 않고 +1가서 값만 꺼내본다.
+    def peek(self):
+        if self.isEmpty():
+            raise IndexError("Queue empty")
+        return self.data[ (self.front +1) % self.maxCount ]
+
+
+#### 우선순위큐 : 삭제 혹은 중간에 삽입(정렬유지enqueue)도 해야하므로 DLL로 구현하는게 좋다.
+class PriorityQueue:
+
+    def __init__(self):
+        self.queue = DoublyLinkedList()
+
+    def size(self):
+        return self.queue.getLength()
+
+    def isEmpty(self):
+        return self.size() == 0
+
+    # 우선순위큐의 특징은 삽입시 정렬을 유지한체 해당 자리에만 삽입한다.
+    # - 대신 뺄때는 편하게 정렬된 마지막만 빼면 된다.
+    def enqueue(self, x):
+        newNode = Node(x)
+
+        curr = self.queue.head # 직전까지의 node이며 업데이트 됨.
+        # 1) 실Node내에서 2) 데이터x가 curr(직전).next(현재) node와 비교해서, 작다?==우선순위높다?==더 오른쪽으로 건너가야한다.
+        while curr.next.data != None and curr.next.data > x:
+            curr = curr.next 
+        # 지금은 1) 실Node 내에서 현재항(curr.next)보다는 커서..(크거나같아서)  현재항의 자리에 삽입되어야함.
+        #       -> 삽입은 insertAt(pos) -> prev등 Node를 얻은 상태에서 삽입은? insertAfter()
+        # curr.next 현재항자리에 삽입해야하는데, prev가 필요하므로 curr가 prev다
+        # 2) 실Node가 끝난 마지막 상황이라면? curr가 마지막 node다... 
+        #    n+1자리에 삽입하는 것이고, curr이 n항이자 prev다.
+        # 1), 2)경우 모두 insertAfter(curr, newNode)로 해결된다.
+        self.queue.insertAfter(curr, newNode)
+
+    def dequeue(self):
+        # 현재 우선순위높을수록(작을수록), 오른쪽에 오도록 정렬해놨으니... 젤 오른쪽꺼 빼면된다.
+        return self.queue.popAt(self.queue.getLength())
+    
+    def peek(self):
+        # 데이터를 볼때도 가장 오른쪽 데이터가 나올예정이니 그것으 데이터 보여주면 됨.
+        return self.queue.popAt(self.queue.getLength()).data
+
+
+    
+
+
+
 
 
 
