@@ -22,7 +22,7 @@
 5. `Greedy Algorithm` : 부분문제 + 각 부분이 최대값을 선택했을 때가 정답
 6. `기타` 등 구현 : 배경지식이 필요한 개념.
    - 소수 판별(isPrime2) / 소수 카운팅(에라토스테네스의 체) countPrimes2, findPrimes / 소인수분해 factorize2, 중복제거 소인수 모음 findFactors / 공통 소인수 commonFactors -> gcd2 공통소인수들의 누적곱/ math.gcd와 최소공배수 lcm, lcmFromTo / 달력만들기 - 윤년판단(for2월일수) leapyear, 이번달의 일수 daysOfMonth, 해당월 1일의 요일=시작요일 dayOfTheWeek, 전체달력출력 printCalendar / 
-7. `추가 기타` 구현 : 콜라츠의 추측 collatz(n) / 로마숫자를 아라비아 숫자로 toArabicNumber / 아라비아숫자를 로마숫자로 toRomanNumber / 
+7. `추가 기타` 구현 : 콜라츠의 추측 collatz(n) / 로마숫자를 아라비아 숫자로 toArabicNumber / 아라비아숫자를 로마숫자로 toRomanNumber / 스무고개 binary_guess, binary_guess_count/
 
 ### Big-O of n 알고리즘 (나올때마다 기록해두기)
  - 이진탐색 : log(n)
@@ -104,7 +104,9 @@
 3. [최적의 부분문제]를 구성한 배반의 [부분문제들이 내려가면서 중복]되는지 확인한다. -> Dynamic(Memo or Tabul or Tabul공간최적화)
  -> n-1 + n-2등으로 풀리는 부분문제의 경우는 거의 중복된다. 참고로 n//2 의 mid활용, merge_sort 등에서 input의 길이로 부분문제를 만드는 경우에는 중복이 없을 수도 있다.
  --> n-1, n-2등의 촘촘한, 다 알아야하는 것은 tabulation -> 공간최적화
+ --> tabulation: 1) n과 index를 일치시킨 table(list)에 초기항을 넣어둔다. 2) for문 1개로  초기항이후~n까지 돌면서 n까지 table을 채운다. 3) table[n]을 반환한다
  --> tabulation의 문제들(최소동전거슬, 계단올라가기)는 (N번째, [단위리스트])의 2가지 인자를 받는 것 같다.
+ ---> table ---> 공간 optimized: 1) 재귀식을 구성하는 부분문제의 갯수만큼 변수를 for문에서 생성 및 업데이트를 유지해야하므로, 초기항 변수도 그만큼 둔다.(n-1도, n-2도 다 <다음항으로 update> 되어야함.) 주로, prev[func(n-2)], curr[func(n-1)]형식이며, 그 중 curr(뒤쪽)값이 반복문을 다 돌고 return할 n번째항이 된다.  2) table처럼 for로 n을 찾아가는 것은 똑같으나, 초기항을보고 curr기준으로 반복문을 다 나왔을 시 n이 되록 전진(for문위변수 update)횟수를 민감하게 잘 판단한다. 3) 반복문동안 n으로 update된 curr변수를 return한다.
  --> n//2, k와 n-k의 부분문제 -> cache를 쓰는 memoization
  -> tabulation(부분문제를 list[k-1], list[k-2]로 품)으로 풀거면, base case를 list의 0, 1에 미리 채워놓고, n단계에서 뽑아서 부분해결한 상태로 가정해서 conquer해주면 된다. 문제는.. n번째 구할떄.. 첨부터 n까지 채워야함 -> 공간 최적화해야함. -> 초기항 확인후, 몇번반복해야할지 초기항~n항으로 판단.
  -> memoization(부분문제가 없음)은 재귀함수가 cache(dict)를 인자로 받으며, recursive case에서는 cache에 있는경우부터 먼저 확인하여 있으면 return하고 당시 함수를 종료시켜야함. 없는경우 나눠서 계산한다. default값 없이 시작 + for  if key에있으면 return 없으면 =True 넣기. if에서 해결로직이 완성되었다. 

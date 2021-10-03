@@ -1,7 +1,8 @@
 # 느낀점 : 
 # 1. 반복횟수가 나올 땐, 각 input을 comp로 반복횟수만큼 동시에 받자.
-# 2 . 각 item에 대해, 속해있는 그룹 전체를 다시 돌면서 비교, for + list(filter(lambda x: x,item ))
-#    - filter(lambda:에서 [도는x]과 [각item]으로 만난다,     전체그룹)
+# 2 . 각 item에 대해, 속해있는 그룹 전체를 다시 돌면서 비교, for + list(filter(lambda x: x, item ))
+#    - filter(lambda:에서 [filter로 돌고있는 k번째 아이템]과 [for로 고정된 i번재item]]으로 만난다,     items)
+#    -> for고정된 좌표 (x_i,y_i)에 대하여,   filtering 한다.. 전체 좌표들 중 x와  y가 큰 것들만..
 ################ Input From input.txt ################
 import sys
 from pprint import pprint
