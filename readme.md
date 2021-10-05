@@ -104,10 +104,13 @@
 3. [최적의 부분문제]를 구성한 배반의 [부분문제들이 내려가면서 중복]되는지 확인한다. -> Dynamic(Memo or Tabul or Tabul공간최적화)
  -> n-1 + n-2등으로 풀리는 부분문제의 경우는 거의 중복된다. 참고로 n//2 의 mid활용, merge_sort 등에서 input의 길이로 부분문제를 만드는 경우에는 중복이 없을 수도 있다.
  --> n-1, n-2등의 촘촘한, 다 알아야하는 것은 tabulation -> 공간최적화
- --> tabulation: 1) n과 index를 일치시킨 table(list)에 초기항을 넣어둔다. 2) for문 1개로  초기항이후~n까지 돌면서 n까지 table을 채운다. 3) table[n]을 반환한다
+ --> tabulation: 1) n과 index를 일치시킨 table(list)에 초기항을 넣어둔다. 2) for문 1개로  초기항이후~n까지 돌면서  부분문제들 & append로 n번째 index의 table을 채운다. 3) table[n]을 반환한다
  --> tabulation의 문제들(최소동전거슬, 계단올라가기)는 (N번째, [단위리스트])의 2가지 인자를 받는 것 같다.
+ ----> tabul시, 부분문제의 갯수(3개) > 알 수 있는 초기항(2개) 라면? 초반 문제 풀어나갈 때 n-3 정도에서 음수가 나온다. -> table[음수index]를 방지하기 위해 tabul2) 부분문제로 append전에 table[n]=0초기화 이후, if 필터링해서 +=로 값을 추가한다.
+ my) append할 때 필터링이 필요하다면, table.append(0)등으로 초기화해놓고 if필터링: +=를 활용한다.
  ---> table ---> 공간 optimized: 1) 재귀식을 구성하는 부분문제의 갯수만큼 변수를 for문에서 생성 및 업데이트를 유지해야하므로, 초기항 변수도 그만큼 둔다.(n-1도, n-2도 다 <다음항으로 update> 되어야함.) 주로, prev[func(n-2)], curr[func(n-1)]형식이며, 그 중 curr(뒤쪽)값이 반복문을 다 돌고 return할 n번째항이 된다.  2) table처럼 for로 n을 찾아가는 것은 똑같으나, 초기항을보고 curr기준으로 반복문을 다 나왔을 시 n이 되록 전진(for문위변수 update)횟수를 민감하게 잘 판단한다. 3) 반복문동안 n으로 update된 curr변수를 return한다.
  ----> 공간optimized의 기준이 변수a,b중 a(prev)다? == [n=1일 때 a에 맞춰진다] -> a가 input n의 기준이므로 return a
+ 
  --> n//2, k와 n-k의 부분문제 -> cache를 쓰는 memoization
  -> tabulation(부분문제를 list[k-1], list[k-2]로 품)으로 풀거면, base case를 list의 0, 1에 미리 채워놓고, n단계에서 뽑아서 부분해결한 상태로 가정해서 conquer해주면 된다. 문제는.. n번째 구할떄.. 첨부터 n까지 채워야함 -> 공간 최적화해야함. -> 초기항 확인후, 몇번반복해야할지 초기항~n항으로 판단.
  -> memoization(부분문제가 없음)은 재귀함수가 cache(dict)를 인자로 받으며, recursive case에서는 cache에 있는경우부터 먼저 확인하여 있으면 return하고 당시 함수를 종료시켜야함. 없는경우 나눠서 계산한다. default값 없이 시작 + for  if key에있으면 return 없으면 =True 넣기. if에서 해결로직이 완성되었다. 
@@ -115,7 +118,8 @@
  -> 자료형의 index탐색이 아닌, value값의 범위를 탐색할 때도, start,end의 인자가 필요하다. 특히 이진탐색의 mid활용시 부분문제conquer시 활용을 위해 원래함수에 인자로 존재해야함. 
     - <value탐색>은 이진의 절반 탐색이라도... index가 아니므로  <모든 요소를 돌면서> if 범위로 판단한다. ex> count=0 <모든 요소 for돌면서> if절반범위 count+=1
     - 또한, <value탐색>은 list는 그대로 두고, value의 범위만 바뀐체 탐색을 이어나간다. ex> 중복검사 자체를 list전체돌기 + value만의 범위만 바꿔서 탐색하기 때문에 
- -> 이진 탐색으로 푸는 부분문제는 if 발견시 return왼쪽 / 아니면 return오른쪽 으로 해결한다.
+ -> 이진 탐색으로 푸는 부분문제는 if 발견시 start==end될때까지 돌려야하니 줄어든 절반범위로 찾도록 return 중복찾은쪽의 부분문제 else return 중복못찾은쪽의 부분문제
+ --> 이진탐색은, 결국 start == end로 1개 값을 찾을 때까지, 2개 범위(index를 절반 or value범위를 절반) 중 찾은 범위에서 다시 부분문제를 계속 돌리는 구조다.
 
 4. 조건별 부분1 + 2 + 3으로 나눈 것 중 배반문제가 아니라 [최대/최소 등 특정조건 1개 선택]이 답인지 확인한다. 조건 중에 최대값을 선택 + 그때의 부분문제가 원래 문제의 답인지 [Greedy algorithm]을 판단해서 푼다.
  -> greedy는 부분문제(직전항의 정답이용)와의 규칙(택1의 규칙)이 발견되면, for로 <<첨부터 1번에 다>> 돌면서 현재까지 max값을 update하도록 설계되는 것 같다. 규칙만 발견되면 부분문제는 아예 함수내에서 사라짐.

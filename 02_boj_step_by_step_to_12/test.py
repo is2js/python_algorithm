@@ -24,6 +24,11 @@ sys.stdin = open("./input.txt", "rt")
 ######################################################
 N = int(input())
 
-data = [ list(map(int, input().split()))  for _ in range(N)]
+data = [ input() for _ in range(N)]
+data = list(set(data))
 
-print(sorted(data, key=lambda x:(x[1], x[0])))
+data.sort(key=lambda x:(len(x),x))
+
+
+for x in data:
+    print(x)
