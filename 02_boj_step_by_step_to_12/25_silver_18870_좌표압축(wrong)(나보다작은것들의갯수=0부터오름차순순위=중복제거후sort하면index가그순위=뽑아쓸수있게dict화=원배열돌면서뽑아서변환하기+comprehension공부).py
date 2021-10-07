@@ -3,13 +3,13 @@ author : ChoJaeSeong
 github : https://github.com/is2js
 e-mail : tingstyle1
 
-title : 나이순 정렬
+title : 좌표 압축
 description : 정렬
 """
-# 참고블로그 : https://velog.io/@cosmos/BOJ%EB%B0%B1%EC%A4%80-18870-python
 # 느낀점 : 시간초과는 공간복잡도를 늘리자.(변수사용)
 # - 
 # 시간초과코드지만, list comp로도 2중for문을 돌릴 수 있다.
+# 참고블로그 : https://velog.io/@cosmos/BOJ%EB%B0%B1%EC%A4%80-18870-python
 # **- x고정을 원한다면, 콤마로붙어지는 앞쪽의 괄호안에서 돌리기 [  (x를 고정시킨 상태에서, 여기서 for y in data ) for x in data ]**
 # - x고정이 아니라, 모든 경우의수를 콤마로 펼칠려면, 뒤에서 한번 더 돌리기 [ for x in data for y in data]
 

@@ -1,7 +1,9 @@
 ### 레포지토리 생성 목적
  - cf) 기업 interview: 비슷한 알고리즘 본 적 있나요??의 질문을 받은 뒤, 대기업 코딩테스트 수준까지 역량을 끌어올리기 위해 공부 기록을 정리함.
     - 21.09.08 : 03_silver_1316_그룹단어체커(interview)(sorted의 데이터 변환_find_연속된단어)에서 string.find를 이용하여 튀는 index를 찾는 경우?
-    - 21.09.22 : doublylinkedlist의 __repr__ 작성시 "->" 챙기는 로직(단)다음것, 양) 다다음 것이 있을때 s+="->" )로 화살표를 출력하는 것 ex> Drug
+    - 21.09.22 : doublylinkedlist의 __repr__ 작성시 "->" 챙기는 로직(단)다음것, 양) 다다음 것이 있을때 s+="->" )로 화살표를 출력하는 것 cf) 나는 그냥 '->'.join()으로 사이사이마다 연결함.
+    - 21.10.07 : stack문제) 가장 큰 수 - 원본순서기억하면서 넣되, 직전or최근값과 비교(LIFO)해서 나보다 작으면 pop으로 날리기. pop횟수 제한. -> 순서대로 먹는 약을 앞에것과 중복되면pop으로 날리면서 순서대로 unique하게 기억하면서 push하기.
+    
  - 작업환경 : `wsl2`, `vscode`
     ![image-20210924073210862](https://raw.githubusercontent.com/is3js/screenshots/main/image-20210924073210862.png)
 
