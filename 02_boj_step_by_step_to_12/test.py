@@ -1,33 +1,44 @@
-"""
-author : ChoJaeSeong
-github : https://github.com/is2js
-e-mail : tingstyle1
-https://rebas.kr/792
-title : 테트로미노 공부해보기
-description : 
-"""
-
 ################ Input From input.txt ################
 import sys
 from pprint import pprint
 sys.stdin = open("./input.txt", "rt")
 
 ### import sys
-### input = sys.stdin.readline
+### input == sys.stdin.readline
 ######################################################
+
+
+
+n, k = map(int, input().split())
+
 from collections import deque
 
-N = int(input())
+dq = deque(list(range(1, n+1)))
+res = []
 
-dq = deque(range(1,N+1))
 
-if len(dq)==1:
-    print(dq[0])
-else:
-    while dq:
+
+
+    
+
+
+while dq:
+    if k-1>0 :
+        for _ in range(k-1):
+            dq.append(dq.popleft())
+    res.append(dq.popleft())
         
-        dq.append(dq.popleft())
-        if len(dq)==1:
-            print(dq[0])
-    
-    
+if n==1:
+    print(f"<{res[0]}>")
+else:
+    answer = ', '.join(map(str, res))
+    answer = "<" + answer + ">"
+    print(answer)
+        
+        
+        
+
+            
+        
+        
+        
