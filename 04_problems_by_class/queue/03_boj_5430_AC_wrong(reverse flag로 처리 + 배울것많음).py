@@ -125,9 +125,7 @@ for _ in range(t):
     #         print("error")
     #         break
     # else:
-    #     print(f"[{','.join(map(str, dq))}]")
-
-    
+    #     print(f"[{','.join(map(str, dq))}]")   
 
 
 

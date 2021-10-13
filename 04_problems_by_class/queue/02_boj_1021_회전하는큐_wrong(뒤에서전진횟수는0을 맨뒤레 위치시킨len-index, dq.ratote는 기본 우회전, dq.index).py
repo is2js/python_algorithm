@@ -1,3 +1,4 @@
+# https://www.acmicpc.net/problem/1021
 # 느낀점:
 # 1. sys.exit()로 반복문 아니라도 break 로직종료가 가능하다.
 # 2. deque에는 .rotate()함수가 있어서 원형큐처럼 사용이 가능하며, 기본적으로 right rotation이다.
