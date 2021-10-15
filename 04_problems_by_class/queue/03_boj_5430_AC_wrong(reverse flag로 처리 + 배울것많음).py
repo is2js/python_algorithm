@@ -5,14 +5,14 @@
 # 2. n <= 100,000 -> 최대 O(n log n) 안으로 풀어야함.
 # -> 함수 p 가 RDD 로 주어지면, 어찌됐든 R, D, D 식으로 리스트 p를 한 번 탐색은 해야할 터,
 # --> 각 for p로 기본 시간복잡도는 O(n) --> 그 내부에서는 O(lg(n))에 끊어야하는데 사실상 O(1)로 끊어라는 뜻이다.
-# --> list의 append, pop-O(1) 제외 다 금지 된다.
+# --> list의 양끝 append, pop-O(1)  나머지는 O(n) or 정렬인 O(nlgn)
 # ---> index를 땡겨야하는 `insert, del, index, reverse` -> O(n)  + slicing([a:b]) : O(b-a)  + sort, sorted: O(nlgn)
 # --> for p를 빠져나와서는 출력직전에 .reverse는 상관없다.
 # **3. 'D' 의 경우, 첫 번째 원소를 pop 해야 하므로, deque사용한다!**
 # -> popleft() 를 사용함으로써 O(1) 만에 끝낼 수 있다.
 # **인덱스 접근은 양 끝에서 O(1), 하지만 중간 데이터에 접근한다면 O(N)으로 느려진다. 빠른 인덱스 접근을 원한다면, 리스트를 사용하라.**
-# 4. R마다 실제로 뒤집는게 아니라 <뒤집는다고 치고의 상황> + flag를 걸어놓는다.
-# ** 3항연산자로 flag변수 업뎃 방법:flag=False   flag = False <--(1) if flag else (2)--> True
+# 4. R마다 실제로 뒤집는게 아니라 <뒤집는다고 치고의 상황> + flag를 걸어놓고 -> 양끝 중 어느쪽인지 처리한다 pop() or popleft() 둘다 O(1)
+# ** 3항연산자로 flag변수 업뎃 방법:flag=False -> flag = False <--(1) if flag else (2)--> True
 # -> R or D 상황밖에 없으므로 <R 상황에 따른 D만 고려> + <출력시는 R고려 진짜 뒤집어 출력>
 # -> 정상인 체, D? -> popleft()
 # -> 뒤집혀진 체, D? -> pop()

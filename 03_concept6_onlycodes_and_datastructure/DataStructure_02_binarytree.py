@@ -1,5 +1,6 @@
 #### 이진트리 Node + BinaryTree 구현
 # 연산: size, depth, inorder, preorder, postorder 구현
+# **node에서는 left/right tree무조건 호출 -> tree에서 root가 있나/없나 확인**
 class Node:
     def __init__(self, item):
         self.data = item
@@ -17,7 +18,7 @@ class Node:
         r = self.right.depth() if self.right else 0
         return max(l, r) + 1
 
-    # 순회시작---
+    # node의 순회시작---
     # 중위순회
     def inorder(self):
         traversal = [] 
@@ -49,19 +50,22 @@ class Node:
         traversal.append(self.data)
         return traversal
 
-        
+# **node에서는 left/right tree무조건 호출 -> tree에서 root가 있나/없나 확인**
 class BinaryTree:
     # tree는 self.r에 root노드를 받아 저장해놓고 있음. 그것외에는 없다?!
     def __init__(self, r):
         self.root = r
 
-    # tree는, 나의 root node가 존재할 경우 node가 수행할 함수들을 호출만하도록 정의해놓음. tree = root + left + right이며..  재귀적으로 호출될려면 그렇게 구성되어야한다.
+    # tree는, 나의 root node가 존재할 경우, node가 수행할 함수들을 호출만하도록 정의해놓음. tree = root + left + right이며..  재귀적으로 호출될려면 그렇게 구성되어야한다.
     # **부분문제로서의 tree는 root_node가 존재 안할수도 있나보다. 그래서 부분문제로서 base를 가져야하므로 0 or [] 빈리스트를 돌려주도록 짠다.**
+    # -> tree는 부분의 sub, right tree로, node에서 self.left, self.right로  무적권 일단 호출되므로
+    # --> 무적권 호출에 대한 return size,dept=0, 순회=[] 의 basecase를 tree가 없어 끝인 경우, 함수종료를 정의해줘야한다.
+    # **node에서는 left/right tree무조건 호출 -> tree에서 root가 있나/없나 확인**
     def size(self):
         if self.root:
             return self.root.size()
         else:
-            0 
+            return 0 
 
     def depth(self):
         return self.root.depth() if self.root else 0
