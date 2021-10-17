@@ -82,7 +82,75 @@ class BinaryTree:
 
     
 
+# 이진탐색트리
+class Node:
+    # 탐색트리부터는 Node가 key+data로 구성된다.
+    def __init__(self, key, data):
+        self.key = key
+        self.data = data 
+        self.left = None 
+        self.right = None
+    
+    def insert(self, key, data):
+        # data이전에, 일단 들어오는 key  vs  root_node로서 나의 key를 비교한다.
+        if key < self.key:
+            # 해당 tree가 있으면, 그 tree에서 insert를 새롭게 주문한다.
+            if self.left:
+                self.left.insert(key, data)
+            # 들어가야할 왼쪽에 tree가 없으면?, [Insere상황에서] Node를 생성 -> new Node를 tree자리에 넣어서 단다.
+            # * 빈자리에 Node를 단다 -> 빈 sub Tree자리에 new Node를 넣어서 끝낸다.
+            else:
+                self.left = Node(key, data)
+        elif key > self.key:
+            if self.right:
+                self.right.insert(key, data)
+            else:
+                self.right = Node(key, data)
+        else: 
+            # * 이진 탐색 트리에서는 key 중복을 허용하지 않음. 같은 key값이 들어오면 에러를 낸다.
+            raise KeyError('중복된 노드 존재')
+    
+    # * 이진탐색 트리에서는, data가 아니라 T[ node, node] 의 Node list를 모아서 반환한다.
+    def inorder(self):
+        traversal = []
+        # sub tree가 있으면 재귀적 Tree.inorder()를 주면하면 된다. []값으로 return되니 += list extend로 붙혀준다.
+        if self.left:
+            traversal += self.left.inorder()
+        traversal.append(self)
+        if self.right:
+            traversal += self.right.inorder()
 
+        return traversal
+
+class BinSearchTree:
+    # *이진탐색 트리는 root_node를 인자로 안받고, 비어있는 트리(root=None)으로 일단 생성한다.
+    # -> 이진탐색 트리는 insert시 빈tree에 Node를 할당해서 트리를 만들었다.
+    # --> 해당tree insert시 비었으면, insert해서 self.root(node)를 .insert()해서 채운다?
+    def __init__(self):
+        # 이탐 tree는 root노드가 없을 수 있다.
+        self.root = None
+
+    def insert(self, key, data):
+        if self.root:
+            self.root.insert(key, data)
+        # 이탐 tree가 루트노드가 없을 수 도 있다.-> insert아니라면 말단으로 온상황이다.
+        #  -> insert라면 node를 root_node에 넣어서 만들어준다.
+        else:
+            self.root = Node(key, data)
+        
+    
+    def inorder(self):
+        if self.root:
+            self.root.inorder()
+        # 이탐 tree가 루트노드가 없을 수 도 있다.-> insert아니라면 말단으로 온상황이다.
+        #  -> inorder라면, 말단에서 빈 list를 반환해주자. 
+        #  -> 부모tree에서는  node_list += 로 extend를 할 준비를 하고 있을 테니
+        else:
+            return []
+            
 
     
+    
+
+
 

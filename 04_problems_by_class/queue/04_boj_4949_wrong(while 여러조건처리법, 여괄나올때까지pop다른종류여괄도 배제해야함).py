@@ -1,9 +1,10 @@
 # 느낀점:
 # 1. 닫괄만날시, 여는괄호나올때까지 pop하는 조건이 
-#   1-1) while stack(있어야함) and 
-# * 1-2) stack[-1] not in others(담긴 것이 다른종류의 여는괄호가 아니여야함) and 
-#   1-3) stack[-1] != 여괄(match[x] or  '(' or '[')로 만날때까지 -> 나오는 순간이 만나는 순간임.
-# * 2. while 끝난 순간: stack[-1] == 만난순간일 것 같지만.
+#   1-1) while stack(pop전 확인->있어야함) and 
+# * 1-2) stack[-1] not in others(담긴것은 여괄만! and 담긴 것이 다른종류의 여는괄호가 아니여야함) and 
+#       cf) 차집합을 set(lst1) set(lst2)보다  1개만 set(lst1).difference( list 2)로 set1번만 해도된다.
+#   1-3) 원하는조건=(필수검사후)마지막조건= <stack[-1] 여괄나오기직전까지> = < stack[-1] != 여괄(match[x] >or  '(' or '[')로 만날때까지 -> 나오는 순간이 만나는 순간임.
+# * 2. while 끝: stack[-1] == 만난순간 (조건3이 끝나고 원하는 상황)일 것 같지만.
 #   2-1) if not 1-1조건으로서, 여괄만나기도전에 pop되었거나 OR
 #   2-2) elif not 1-2조건으로서, 다른종류여괄만났거나 OR
 #   2-3) else 그게 아니라면 1-3)으로서 stack[-1] == 여괄인 순간이다.
