@@ -1,0 +1,16 @@
+<mxfile host="65bd71144e">
+    <diagram id="ISEfmjQ4Sx_iq4_TVQYN" name="페이지-1">
+        <mxGraphModel dx="1143" dy="619" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="" style="rhombus;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=-1;hachureGap=8;fillStyle=cross-hatch;fillColor=#006600;sketch=1;" vertex="1" parent="1">
+                    <mxGeometry x="200" y="260" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;fillColor=#1ba1e2;sketch=1;" vertex="1" parent="1">
+                    <mxGeometry x="354" y="110" width="120" height="60" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
