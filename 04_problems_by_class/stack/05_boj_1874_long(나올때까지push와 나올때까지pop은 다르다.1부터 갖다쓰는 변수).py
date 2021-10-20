@@ -2,8 +2,8 @@
 #   1. target들을 INPUT창에 따로 뿌려줘도, 미리 배열에 받아두자. [int(input()) for _ in range(n)]
 # * 2. [1부터 n]까지를 갖다쓰는데, queue에서 popleft()로 빼 쓸거 아니면 -> <cnt=1부터 갖다쓰는 변수, 쓸때마다 cnt+=1> 작전을 쓰자.
 # * 3. target 및 현재수(cnt)에 따라  
-# * 3-1) target <= cnt <나올때까지push> : <equal은 push에서 단다!!> 
-# * 3-2) cnt < target  <나올때까지pop>  : whjle stack and <no equal의 pop조건>은 [equal전에, 중간에 비었는지 검사를 하여, 알아서 예외처리 된다.]
+# * 3-1) target >= cnt <나올때까지push> : <equal은 push(append)에서 단다!!> 
+# * 3-2) cnt > target  <나올때까지pop>  : while stack and <no equal의 pop조건>은 [while끝나고, equal원하는조건 전에, 중간에 비었는지 검사를 하여, 알아서 예외처리 된다.]
 # * 4. <나올때까지pop>은 중간에 stack비게 되면 -> while후에 [원하는조건직전]에 [not stack]으로 비는지 확인을 하며 [알아서 못찾으면 종료]가 명확함.
 # * 5. <나올때까지push>는 stack[-1]이 아니라, 넣기전의 변수(여기선cnt)로 while문을 짜며, equal이 될때까지[원하는 조건까지] push한다.
 #  -> 중간에 다른 이유로 멈출일이 없기 때문. <<< 만약, 간격이 +1이 아니고 크면 넘어가버릴 수도 >>>
