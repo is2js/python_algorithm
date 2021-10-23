@@ -9,22 +9,26 @@
 
 
 ### 알고리즘 레포지토리 📂(folder/)  📜 (.ipynb)   🐍(.py)
- - 📂 01_codeup: 🐍 기초 100제 중 마지막 배열문제들(6092\~6098)
+ - 📂 00_algorithm_paradigm
+   - 📜 concept01\~06 : 예제를 통한 알고리즘 분류별 개념정리(Codeit, Leetcode, 주니온TV)
+   - 📜 practice01\~06 : 예제를 통한 알고리즘 분류별 Lv1~3 문제풀이( Codeit, Leetcode)
+   - 🐍 concept6-3-1~7: concept06의 코드만 정리(주니온TV)
+      1. `정렬과 탐색` : 선형/이진탐색 + 선택/삽입정렬 
+      2. `Brute Force` : 전체 다 살펴보는 방식의 문제
+      3. `Divide and Conquer` : 재귀 등 부분문제가 있는 살펴보기
+      4. `Dynamic Programming` : 부분문제 + 중복되는 문제를 memo(dict, 부분문제 없이 넣고 저장) or tabulation(list, base index 넣어놓고 처음부터, 부분문제가 list[k-1] 등)로 해결하기
+      5. `Greedy Algorithm` : 부분문제 + 각 부분이 최대값을 선택했을 때가 정답
+      6. `기타` 등 구현 : 배경지식이 필요한 기초 구현 문제(주니온TV)
+         - 소수 판별(isPrime2) / 소수 카운팅(에라토스테네스의 체) countPrimes2, findPrimes / 소인수분해 factorize2, 중복제거 소인수 모음 findFactors / 공통 소인수 commonFactors -> gcd2 공통소인수들의 누적곱/ math.gcd와 최소공배수 lcm, lcmFromTo / 달력만들기 - 윤년판단(for2월일수) leapyear, 이번달의 일수 daysOfMonth, 해당월 1일의 요일=시작요일 dayOfTheWeek, 전체달력출력 printCalendar / 
+      7. `추가 기타` 구현 : 콜라츠의 추측 collatz(n) / 로마숫자를 아라비아 숫자로 toArabicNumber, 아라비아숫자를 로마숫자로 toRomanNumber / 스무고개 binary_guess, binary_guess_count/ 홀수 마방진 검사 checkMagic(square), NxN 홀수 마방진 만들기 makeMagicSquare(n) / 
+ - 📂 01_codeup: 🐍 Codeup기초 100제 중 마지막 배열문제들(6092\~6098)
  - 📂 02_boj: 🐍 백준 단계별 문제풀기 12단계까지 문제 중 시간초과 or 틀린 문제 풀이 및 고찰
+ - 📂 03_Datastructure: 자료구조를 python Class로 구현한 code
  - 📂 99_기타구현_코드만: 🐍 concept06_etc(기타구현)의 코드부분만 정리한 py파일
- - 📜 concept01\~06 : 예제를 통한 알고리즘 분류별 개념정리(프로그래머스, Codeit)
- - 📜 practice01\~06 : 예제를 통한 알고리즘 분류별 Lv1~3 문제풀이(프로그래머스, Codeit)
  
  - 알고리즘 패러다임(2\~5) 및 기타 분류별(6\~)로 정리한 예제를 노트북 목록 소개
 
-1. `정렬과 탐색` : 선형/이진탐색 + 선택/삽입정렬 
-2. `Brute Force` : 전체 다 살펴보는 방식의 문제
-3. `Divide and Conquer` : 재귀 등 부분문제가 있는 살펴보기
-4. `Dynamic Programming` : 부분문제 + 중복되는 문제를 memo(dict, 부분문제 없이 넣고 저장) or tabulation(list, base index 넣어놓고 처음부터, 부분문제가 list[k-1] 등)로 해결하기
-5. `Greedy Algorithm` : 부분문제 + 각 부분이 최대값을 선택했을 때가 정답
-6. `기타` 등 구현 : 배경지식이 필요한 개념.
-   - 소수 판별(isPrime2) / 소수 카운팅(에라토스테네스의 체) countPrimes2, findPrimes / 소인수분해 factorize2, 중복제거 소인수 모음 findFactors / 공통 소인수 commonFactors -> gcd2 공통소인수들의 누적곱/ math.gcd와 최소공배수 lcm, lcmFromTo / 달력만들기 - 윤년판단(for2월일수) leapyear, 이번달의 일수 daysOfMonth, 해당월 1일의 요일=시작요일 dayOfTheWeek, 전체달력출력 printCalendar / 
-7. `추가 기타` 구현 : 콜라츠의 추측 collatz(n) / 로마숫자를 아라비아 숫자로 toArabicNumber / 아라비아숫자를 로마숫자로 toRomanNumber / 스무고개 binary_guess, binary_guess_count/ 홀수 마방진 검사 checkMagic(square) / nxn 홀수 마방진 만들기 makeMagicSquare(n)
+
 
 
 ### Big-O of n 알고리즘 (나올때마다 기록해두기)
