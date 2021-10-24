@@ -28,7 +28,8 @@
 5. `Greedy Algorithm` : 부분문제 + 각 부분이 최대값을 선택했을 때가 정답
 6. `기타` 등 구현 : 배경지식이 필요한 기초 구현 문제(주니온TV)
    - 소수 판별(isPrime2) / 소수 카운팅(에라토스테네스의 체) countPrimes2, findPrimes / 소인수분해 factorize2, 중복제거 소인수 모음 findFactors / 공통 소인수 commonFactors -> gcd2 공통소인수들의 누적곱/ math.gcd와 최소공배수 lcm, lcmFromTo / 달력만들기 - 윤년판단(for2월일수) leapyear, 이번달의 일수 daysOfMonth, 해당월 1일의 요일=시작요일 dayOfTheWeek, 전체달력출력 printCalendar / 
-7. `추가 기타` 구현 : 콜라츠의 추측 collatz(n) / 로마숫자를 아라비아 숫자로 toArabicNumber, 아라비아숫자를 로마숫자로 toRomanNumber / 스무고개 binary_guess, binary_guess_count/ 홀수 마방진 검사 checkMagic(square), NxN 홀수 마방진 만들기 makeMagicSquare(n) / 
+7. `추가 기타` 구현 : 콜라츠의 추측 collatz(n) / 로마숫자를 아라비아 숫자로 toArabicNumber, 아라비아숫자를 로마숫자로 toRomanNumber / 스무고개 binary_guess, binary_guess_count/ 홀수 마방진 검사 checkMagic(square), NxN 홀수 마방진 만들기 makeMagicSquare(n) / i부터 끝까지의 배열의 합(재귀) sumOfArray(array, i)
+
 ```
 0 [sort]시 직전애들과 비교하는, 삽입정렬 같은 경우, 0~i-1까지는 이미 정렬된 상태인 것을 생각하자.
  -> 정렬에서 i번째? i-1까지는 이미 정렬된 상태이다! 직전까지는 정렬된 상태에서  i번재 요소를 가지고 합류시켜 묶어서 정렬하는 삽입정렬.
