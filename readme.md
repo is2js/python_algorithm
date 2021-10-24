@@ -1,3 +1,6 @@
+![alt text](https://img.shields.io/badge/Python-3.8-red.svg)
+![alt text](https://img.shields.io/badge/BOJ-Algorithm-blue.svg)
+
 ### 레포지토리 생성 목적
  - cf) 기업 interview: 비슷한 알고리즘 본 적 있나요??의 질문을 받은 뒤, 대기업 코딩테스트 수준까지 역량을 끌어올리기 위해 공부 기록을 정리함.
     - 21.09.08 : 03_silver_1316_그룹단어체커(interview)(sorted의 데이터 변환_find_연속된단어)에서 string.find를 이용하여 튀는 index를 찾는 경우?
