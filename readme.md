@@ -1,21 +1,10 @@
 ![alt text](https://img.shields.io/badge/Python-3.8-red.svg)
 ![alt text](https://img.shields.io/badge/BOJ-Algorithm-blue.svg)
-
-### 레포지토리 생성 목적
- - cf) 기업 interview: 비슷한 알고리즘 본 적 있나요??의 질문을 받은 뒤, 대기업 코딩테스트 수준까지 역량을 끌어올리기 위해 공부 기록을 정리함.
-    - 21.09.08 : 03_silver_1316_그룹단어체커(interview)(sorted의 데이터 변환_find_연속된단어)에서 string.find를 이용하여 튀는 index를 찾는 경우?
-    - 21.09.22 : doublylinkedlist의 __repr__ 작성시 "->" 챙기는 로직(단)다음것, 양) 다다음 것이 있을때 s+="->" )로 화살표를 출력하는 것 cf) 나는 그냥 '->'.join()으로 사이사이마다 연결함.
-    - 21.10.07 : stack문제) 가장 큰 수 - 원본순서기억하면서 넣되, 직전or최근값과 비교(LIFO)해서 나보다 작으면 pop으로 날리기. pop횟수 제한. -> 순서대로 먹는 약을 앞에것과 중복되면pop으로 날리면서 순서대로 unique하게 기억하면서 push하기.
-    
- - 작업환경 : `wsl2`, `vscode`
-    ![image-20210924073210862](https://raw.githubusercontent.com/is3js/screenshots/main/image-20210924073210862.png)
-
-
 ### 알고리즘 레포지토리 📂(folder/)  📜 (.ipynb)   🐍(.py)
  - 📂 00_algorithm_paradigm
    - 📜 concept01\~06 : 예제를 통한 알고리즘 분류별 개념정리(Codeit, Leetcode, 주니온TV)
-   - 📜 practice01\~06 : 예제를 통한 알고리즘 분류별 Lv1~3 문제풀이( Codeit, Leetcode)
-   - 🐍 concept6-3-1~7: concept06의 코드만 정리(주니온TV)
+   - 📜 practice01\~06 : 예제를 통한 알고리즘 분류별 Lv1~3 문제풀이(Codeit, Leetcode)
+   - 🐍 concept6-3-1 ~ 6-3-6: concept06의 코드만 정리(주니온TV)
  - 📂 01_codeup: 🐍 Codeup기초 100제 중 마지막 배열문제들(6092\~6098)
  - 📂 02_boj_step_to_12: 🐍 백준 단계별 문제풀기 12단계까지 문제 중 시간초과 or 틀린 문제 풀이 및 고찰
  - 📂 03_Datastructure: 🐍 자료구조를 python Class로 구현한 code
@@ -31,7 +20,7 @@
 5. `Greedy Algorithm` : 부분문제 + 각 부분이 최대값을 선택했을 때가 정답
 6. `기타` 등 구현 : 배경지식이 필요한 기초 구현 문제(주니온TV)
    - 소수 판별(isPrime2) / 소수 카운팅(에라토스테네스의 체) countPrimes2, findPrimes / 소인수분해 factorize2, 중복제거 소인수 모음 findFactors / 공통 소인수 commonFactors -> gcd2 공통소인수들의 누적곱/ math.gcd와 최소공배수 lcm, lcmFromTo / 달력만들기 - 윤년판단(for2월일수) leapyear, 이번달의 일수 daysOfMonth, 해당월 1일의 요일=시작요일 dayOfTheWeek, 전체달력출력 printCalendar / 
-7. `추가 기타` 구현 : 콜라츠의 추측 collatz(n) / 로마숫자를 아라비아 숫자로 toArabicNumber, 아라비아숫자를 로마숫자로 toRomanNumber / 스무고개 binary_guess, binary_guess_count/ 홀수 마방진 검사 checkMagic(square), NxN 홀수 마방진 만들기 makeMagicSquare(n) / i부터 끝까지의 배열의 합(재귀) sumOfArray(array, i)
+7. `추가 기타` 구현 : 콜라츠의 추측 collatz(n) / 로마숫자를 아라비아 숫자로 toArabicNumber, 아라비아숫자를 로마숫자로 toRomanNumber / 스무고개 binary_guess, binary_guess_count/ 홀수 마방진 검사 checkMagic(square), NxN 홀수 마방진 만들기 makeMagicSquare(n) / i부터 끝까지의 배열의 합(재귀) sumOfArray(array, i) 
 
 ```
 0 [sort]시 직전애들과 비교하는, 삽입정렬 같은 경우, 0~i-1까지는 이미 정렬된 상태인 것을 생각하자.
@@ -123,6 +112,17 @@
 
 
 ```
+
+### 레포지토리 생성 목적
+ - cf) 기업 interview: 비슷한 알고리즘 본 적 있나요??의 질문을 받은 뒤, 대기업 코딩테스트 수준까지 역량을 끌어올리기 위해 공부 기록을 정리함.
+    - 21.09.08 : 03_silver_1316_그룹단어체커(interview)(sorted의 데이터 변환_find_연속된단어)에서 string.find를 이용하여 튀는 index를 찾는 경우?
+    - 21.09.22 : doublylinkedlist의 __repr__ 작성시 "->" 챙기는 로직(단)다음것, 양) 다다음 것이 있을때 s+="->" )로 화살표를 출력하는 것 cf) 나는 그냥 '->'.join()으로 사이사이마다 연결함.
+    - 21.10.07 : stack문제) 가장 큰 수 - 원본순서기억하면서 넣되, 직전or최근값과 비교(LIFO)해서 나보다 작으면 pop으로 날리기. pop횟수 제한. -> 순서대로 먹는 약을 앞에것과 중복되면pop으로 날리면서 순서대로 unique하게 기억하면서 push하기.
+    
+ - 작업환경 : `wsl2`, `vscode`
+    ![image-20210924073210862](https://raw.githubusercontent.com/is3js/screenshots/main/image-20210924073210862.png)
+
+
 ### Big-O of n 알고리즘 (나올때마다 기록해두기)
  - 이진탐색 : log(n)
     - n의 start or end가 절반씩 줄거나 or 반복문의 index i *= 2 2배로 커지거나 or  n//2 로 절반씩 줌.
