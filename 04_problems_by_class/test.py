@@ -1,14 +1,16 @@
+# https://www.acmicpc.net/problem/2504 괄호의값
 # 느낀점:
-# * 1. 배열내, 같은 숫자의 갯수를 Counter가 아닌, < sort + 비교 >로 알 수 있다.
-# - 배열내, 같은 문자의 갯수도 정렬해서 비교해가며? 할 수 있을 듯.
-# * 2. main함수를 최소화시키고, 반복문 정도만 나열해서 함수를 돌린다.
-# * -> 함수내에서 태케를 처리할 때는, 파라미터를 딱히 안받아도 된다?
-# * -> 테캐가 아니라 2~3중 반복문을 처리할 때만.. 파라미터를 받는 함수로 정의한다?
-# * --> check(i,j,k) 등..
-# * 3. 반복문, 조건문, 입력초기화 등으로 코드를 많이 줄일 수 잇다.
-# * --> main에서 돌릴 함수 -> 함수내 if return이 나왔으면 -> else는 물론이거나와 < elif >도 할 필요도 없다!
-# * 4. main함수에서, 태케마다 기능분리함수->return값을 돌려서 모으는 경우에는, comp로 최대값, 최소값을 바로 써버릴 수 잇도 있음.
-# - print(max(  money() for _ in range(int(input()) )))
+# - 참고 블로그: zero_woo: https://ywtechit.tistory.com/201
+# - 참고 블로그2: 코딩하는 금융인: https://codingspooning.tistory.com/68
+# * 내풀이 문제점: 괄호가 올바른지는 먼저 확인 b 함수 -> 그래야,, 본 풀이시 올바른 경우의 괄호가 올 것이라고 기대할 수 있다.
+# * 1. 올바른지를 먼저 판단하면 -> if stack and stack[-1] == p_dict[i]을 걱정할필요가 없어진다.
+# * -> [항상 맞는 괄호]가 있을테니, [원본의 직전괄호가 뭐냐에 따라 달라지도록 로직만 짜면 된다.]
+# * 2. 같은 level들을 한꺼번에 계산할 수 있게, stack에 () 짝매칭된 괄호를 숫자로 변형해서 넣어놓기 logic!!!!!!!!
+# * 원본에서 본 직전괄호가.. 여괄이 아니라 닫괄이었다? ->
+# * -> [현재 닫괄]가 매칭되는 여괄이 나올때까지 pop후 다 더한다. 
+# * -> [내 매칭  여괄]나올때까지를 같은 level로 본다.
+# * -> 그럴려면 <직전이 여괄이면, 괄호가 아니라 연산할 숫자로 대체해서 넣어놓자!!>
+# * --> 직전여괄을 pop하고 그자리에 계산된 숫자를 집어넣어 () -> 2, [] -> 3으로 변환시킨다.
 ################ Input From input.txt ################
 import sys
 from pprint import pprint
@@ -17,84 +19,88 @@ sys.stdin = open("./input.txt", "rt")
 ### 백준용
 ### import sys
 ### input = sys.stdin.readline
-######################################################
+# ######################################################
 
-# 2. 메인함수에서 각 테케마다 처리될 함수
-def money():
-    #lst = list(map(int, input().split()))
-    # * 3. 배열내, 같은 수 or 문자의 갯수를 찾으려면, sort부터 한다!!
-    lst = sorted(list(map(int, input().split())))
-    # 4. set()을 이용해서 유니크한 것의 갯수를 확인한다면, 같은 수가 몇개인지 알 수 있다.
-    if len(set(lst)) == 1: 
-        return lst[0] * 5000 + 50000
-    # * 5. 함수안에서 if return은, 걸렸음녀 끝난 상황이므로 딱히 elif처리를 할 필요가 없다.
-    if len(set(lst)) == 2: 
-        # 6. 2개만 존재한다면, 1-3/3-1 이거나 2-2 이다.
-        # * 1-3 이든 3-1이든 sort된 상태이므로, [1]번째요소와 [2]번째 요소는 무조건 같다.
-        if lst[1] ==lst[2]:  return lst[1] * 1000 + 10000
-        # * else같아도!! 하지말자. return나왔으면!
-        # else가 없어도, 2-2상황임. 지금은.  가운데 2개는 무조건 다름. 0,3도 다름.
-        return 2000 + (lst[1] + lst[2])*500
-    # * 7. 2-a-b 상황이라면, <정렬상태이므로> 연속된 2개가 같은 경우를 찾아야한다.
-    # * - 22ab a22b ab22 3가지 경우중에 하나이므로, 그냥 for문으로 다돌려서, [i] == [i+1]걸리면, 딱 1경우밖에 없으므로 return시킨다.
-    for i in range(3):
-        if lst[i] == lst[i+1]: return lst[i]*100 + 1000
-    # * 8. 다 앞에서 return나왔으므로, else나 elif가 없어도, 맨 마지막 경우다.
-    # * 맨 마지막 경우: 4개다 다른 경우. -> sorte된 상태므로, 맨 마지막 원소가 젤 크다.
-    return lst[-1]* 100
+p_dict =  {')':'(',']':'['}
+parentheses = input()
 
-
-# # 1. main함수는 최소화시키고, 함수안에서 테케 처리하기
-# # 10. max값 모으기
-# max_money = float('-inf')
-# for _ in range(int(input())):
-#     # 9. 계산 값이 튀어나올 것이다. 그중에 젤 큰값을 뽑음 됨.
-#     max_money = max(money(), max_money)
-# print(max_money)
-
-# * 11. 데이터 변형없이 반복되는 값들 중 맥스값만 찾는 거면, max(  ) 함수내부에서 comp를 돌리면 된다.
-# -> 함수로 기능분리한 뒤, return되는 값을 모아서 그중 단순 최대값만 원한다면 
-print(max(  money() for _ in range(int(input()) )))
-
-
-
-
-# ==================================== 내 코드==============
-# from collections import Counter
-
-# max_money = float('-inf')
-# # 같은 눈이 4개가 나오면 50,000원+(같은 눈)×5,000원의 상금을 받게 된다. 
-# # 같은 눈이 3개만 나오면 10,000원+(3개가 나온 눈)×1,000원의 상금을 받게 된다. 
-# # 같은 눈이 2개씩 두 쌍이 나오는 경우에는 2,000원+(2개가 나온 눈)×500원+(또 다른 2개가 나온 눈)×500원의 상금을 받게 된다.
-# # 같은 눈이 2개만 나오는 경우에는 1,000원+(같은 눈)×100원의 상금을 받게 된다. 
-# # 모두 다른 눈이 나오는 경우에는 (그 중 가장 큰 눈)×100원의 상금을 받게 된다.  
-
-# def calc_money(data):
-#     max_cnt = max(data.values())
-#     val_lst = [ x[0] for x in data.items() if x[1]==max_cnt]
+def check_valid(parentheses):
+    stack = []
     
-#     if max_cnt == 4:
-#         return 50000 + (val_lst[0]*5000)
-#     elif max_cnt == 3:
-#         # val_lst = [ x[0] for x in data.items() if x[1]==max_cnt]
-#         return 10000 + (val_lst[0]*1000)
-#     elif max_cnt == 2:
-#         # val_lst = [ x[0] for x in data.items() if x[1]==max_cnt]
-#         if len(val_lst) == 2:
-#             return 2000+(val_lst[0]*500) + (val_lst[1]*500) 
-#         else:
-#             return 1000 + (val_lst[0]*100)
-#     else:
-#         return max(data.keys())*100
+    for p in parentheses:
+        if p in ['(', '[']:
+            stack.append(p)
+        else:
+            # 닫괄 만날시, stack이 차있고 & top에 잇는 것이 짝맞아서 빼내야함.
+            if stack and stack[-1] == p_dict[p]:
+                stack.pop()
+            else:
+                # stack이 비거나, top에 짝매칭안되면 탈락.
+                return False
+    
+    return False if stack else True
+
+
+def calc_num(p):
+    # (()[[]])([]) -> 이미 올바른 괄호문자열임이 증명된 상태라.
+    stack = []
+    for i in range(len(p)):
+        # 여괄일 땐, 그냥 쌓는 것은 똑같다. pop할 이유가 없어서 맨 위에 배치
+        if p[i] in ['(', '[']:
+            stack.append(p[i])
+        # 닫괄 만날시, 
+        else:
+            # stack이 차있고 & top에 잇는 것이 짝맞아서 빼내야함. 
+            # *-> 이미 올바른 괄호열이라.. 조사할 필요 없다!!!
+            # *-> [항상 맞는 괄호]가 있을테니, [ 원본 직전괄호가 뭐냐에 따라 달라지도록 로직만 짜면 된다.]
+            # if stack and stack[-1] == p_dict[i]:
+
+            # * 원본에서 본 직전괄호가.. 여괄이 아니라 닫괄이었다? ->
+            # * -> [현재 닫괄]가 매칭되는 여괄이 나올때까지 pop후 다 더한다. 
+            # * -> [내 매칭  여괄]나올때까지를 같은 level로 본다.
+            # * --> 그럴려면 <직전이 여괄이면, 괄호가 아니라 연산할 숫자로 대체해서 넣어놓자!!>
+            if p[i-1] in [')',']']:
+                # 직전이 닫괄이라면....  현재닫괄은... 바깥쪽이다. -> 안쪽은 미리 숫자로 변형되어있으니
+                # -> 바깥쪽 닫괄에 매칭되는 여괄이 나올때까지 pop해서 계산하자.
+                # * 이미 다른 경우에서, 닫괄직전이 여괄이라서 숫자로 변형되어 stack에 넣어놓은 상태일 것이다.
+                temp = 0
+                # while stack[-1] != p_dict[p[i]]:
+                print(p_dict[p[i]],stack[-1])
+                while stack[-1] != p_dict[p[i]]:
+                    # 매칭되는 여괄이 나올때까지, 내부level은 이미 숫자로 변형되어져있을 것임.
+                    temp += stack.pop()
+                # 여기는.. stack[-1] == 매칭여괄'('인 상태다. 이건 더할 필요없다.
+                
+                # *매칭되는 여괄까지 빼줘야한다. 빼고 곱해야함.
+                stack.pop()
+
+
+                # * 이제 내부level의 숫자들이 +로 temp에 계산되어져있으니, 닫괄의 숫자로 곱해야함
+                # *-> 곱한뒤 숫자로 변경해주자! 다음 연산을 위해서
+                stack.append(temp * (3 if p[i]==']' else 2))
+            else:
+                # * 이제, 닫괄인데 -> 직전게 여괄이면 무조건 숫자로 변환시키고
+                # * -> 변환된 숫자를 stack에 넣어놓아야, 해당 level 전체를 pop시켜 연산이 가능해진다.
+                val = 2 if p[i]==')' else 3
+                stack.pop() # 여는 괄호를 뺀다.
+                stack.append(val) # 그자리에 계산된 숫자를 집어넣어 () -> 2, [] -> 3으로 변환시킨다.
+
+
+    
+    # 올바른 것만 들어올테니 이런 것도 검사할 필요가 없다.
+    # return False if stack else True
+
+    # 다돌았으면, stack에 계산된 값을 반환해준다.
+    # 이 때, 닫괄마다 숫자1개로 주어지는데, () [] 같은 경우는 다 더해줘야한다.
+    # stack.pop()
+    return sum(stack)
+
+
+if check_valid(parentheses):
+    print(calc_num(parentheses))
+else:   
+    print(0)
 
 
 
-# for _ in range(N):
-#     data = list(map(int, input().split()))
-#     data = Counter(data)
 
-#     money = calc_money(data)
-
-#     max_money = max(max_money, money)
-
-# print(max_money)
