@@ -1,4 +1,5 @@
 # 느낀점:
+# https://www.acmicpc.net/problem/16496
 ################ Input From input.txt ################
 import sys
 from pprint import pprint
