@@ -8,8 +8,6 @@ sys.stdin = open("./input.txt", "rt")
 ### import sys
 ### input = sys.stdin.readline
 # ######################################################
-import sys 
-input = sys.stdin.readline
 
 import sys
 input=sys.stdin.readline
