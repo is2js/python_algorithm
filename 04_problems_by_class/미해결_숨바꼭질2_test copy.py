@@ -1,4 +1,5 @@
 # 느낀점:
+# https://rebas.kr/750
 ################ Input From input.txt ################
 import sys
 from pprint import pprint
@@ -16,25 +17,31 @@ from collections import deque
 
 N, K = map(int, input().split())
 
+# 5 17 -> 4 2  
+# 입력 : 5 100000
+# 답 : 19 4
+# 입력 : 5 1000
+# 답 : 11 2
+
 MAX = 10**5 # 일차원이면 범위가 필요하다.
-# ck=[0]*(MAX+2)
+ck=[0]*(MAX+2)
 # * 가장 빠른 시간이 몇 초 후인지 그리고, 가장 빠른 시간으로 찾는 방법이 몇 가지 인지 구하는 프로그램을 작성하시오.
 # -> 최단거리도 필요하고, 그 최단거리= 그 level에서 최단거리로 걸리는게 또 있는지 물어봄. -> 나중에 level단위로도 끊어야한다.
 # dis=[0]*(MAX+2) 
 dis = 0
 L=0
-L_flag = False # 특정 level을 돌면서 찾는게 아니라, 최단거리 찾을 때 flag만 넣어주고, 그 level까지 진행하면 될듯하다.
+L_flag = -3333 # 특정 level을 돌면서 찾는게 아니라, 최단거리 찾을 때 flag만 넣어주고, 그 level까지 진행하면 될듯하다.
 cnt = 0 # 그 level까지 진행을 하긴하는데, 최단거리 또 나올때마다 cnt+=1해주면 될 것 같다.
 
 
 dq = deque([5])
-# ck[5] = 1
+ck[5] = 1
 # dis[5] = 0
 
 # level단위로 끊기위해 바깥에 level단위로 쓸 반복문(무한루프)를 돌린다.
 while True:
     # 최단거리 발견시 -> <넣기직전 자체처리>에서 flag에 표시를 해서, flag on일 때,  끊자. 
-    if L_flag:
+    if L==L_flag +1:
         break 
 
     # 여기 반복문은 level단위 전체실행이다.
@@ -43,18 +50,21 @@ while True:
         curr_level_node = dq.popleft()
 
         if curr_level_node == K: 
-            L_flag=True
+            # L_flag=True
             # break는 없다. level단위 끝까지 돌고, 바깥 반복문에서 탈출
             cnt+=1
+            if L_flag == -3333 :
+                L_flag=L
+                print(L_flag, L)
 
         for next_level_node in (curr_level_node-1, curr_level_node+1, curr_level_node * 2):
             # 좌표이동시 1) index검사 2) ck검사
             if not (0<=next_level_node<=MAX):continue 
             
-            #  if (ck[next_level_node]):continue 
+            if  (ck[next_level_node]):continue 
 
             dq.append(next_level_node)
-            # ck[next_level_node] = 1
+            ck[next_level_node] = 1
             # dis[next_level_node] = dis[curr_level_node] + 1
     # dis+=1
     L+=1
