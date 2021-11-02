@@ -1,14 +1,15 @@
 # 느낀점:
 # 풀이 참고: https://rebas.kr/750
-# * 결론: cnt는 queue에서 꺼내서 하니, ck continue를 안하는 대신, queue에 넣는 조건을  <  if not dis[next] or  dis[next]==dis[curr]+1 >
+# * 결론: 동일level 추가 최단거리 cnt는 queue에서 꺼내서 하니, ck 검사를 안하는 대신, queue에 넣는 조건을  <  if not dis[next]  + or  dis[next]==dis[curr]+1 >
 #  -> 이미 최단거리가 발견되어 차있더라도, 그 level이 next의 level과 동일하면 같은 선상에서 발견된 것 -> queue에 넣어 cnt+1되도록 하자.
-# * 1. level단위 실행시에는 L=0 L+=1 이 필요하다. 맨마지막에 L-=1번도 ..
-# * 2. cnt변수를 큰 단위 반복실행시에는 <cnt시작된 단위까지만 반복되도록> flag로써도 사용할 수 있다.
+# * 1. level단위 실행시에는 L=0 L+=1 이 필요하다. 맨마지막에 L-=1번도 ..(분수찾기이후.. while 검사 변수cnt 업데이트 이후,,, 또 업데이트했기 때문에 하나 더 차있는 것!)
+# * 2. cnt변수를 <큰 단위 by len(dq) -> 그만큼 while > 반복실행시에는 <cnt+1로 매겨진 순간부터 단위까지만 반복되도록> flag로써도 사용할 수 있다.
 # * while not cnt:  cnt=0을 유지하는 동안만... cnt+=1직전까지.... 
 # ** 근데 그 직전이.. 단위로 실행되서.. [  cnt=0--------cnt+=1되는 순간---------- 그 단위(level)의 끝] 으로서
-# ** 딱 그 level까지만 진행된다. 대신. L+=1 업데이트는 계속 일어나므로 직전레벨로 돌아간다.
-# * 3. 갯수만큼 돌도록 countdown by while ->  while size: size -=1 : 0이 되기직전까지. -> n붙 1까지
-# * 4. 목표좌표 확인 및 cnt+=1는 꺼내고 센다.
+# ** 딱 그 level까지만 진행된다. 대신. L+=1 업데이트는 계속 일어나므로 (검사변수 업데이트 이후 업데이트) -> 직전레벨로 한번 따로 돌아가줘야한다.
+# * 3. 갯수만큼 돌도록 countdown by while ->  [while size: size -=1 ]: 0이 되기직전까지. -> n붙 1까지
+# -> 다른 방법으로서 [n=0부터 내부에서 사용하면서 update하도록 시작 while n < N:  내부n활용 / n+=1 ]-> 0부터 N-1까지 -> N번
+# * 4. 목표좌표 확인 및 cnt+=1는 queue에서 꺼낸 것을 확인 & 센다.
 # * 5. 전설의 로직: if not dis[next] 비었거나 < or 차있더라도 > dis[next] 차있는 level이   dis[curr]+1 현재next의 level과 동일 선상에서 채워졌을 때 -> 같은 선상이라 queue에 넣는다.
 
 
