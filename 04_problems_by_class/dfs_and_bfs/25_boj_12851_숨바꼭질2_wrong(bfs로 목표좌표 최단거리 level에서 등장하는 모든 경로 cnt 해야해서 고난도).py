@@ -12,6 +12,13 @@
 # * 4. 목표좌표 확인 및 cnt+=1는 queue에서 꺼낸 것을 확인 & 센다.
 # * 5. 전설의 로직: if not dis[next] 비었거나 < or 차있더라도 > dis[next] 차있는 level이   dis[curr]+1 현재next의 level과 동일 선상에서 채워졌을 때 -> 같은 선상이라 queue에 넣는다.
 
+# * 원래 arr or -1 : arr 차잇거나 or None으로 비었으면 -1을 default값으로 넣기
+# * 응용 25번 / 프로그래머스07번 -> if not arr[k]  or  arr[k] == ???: 
+# ** --> k번째 배열이 비었거나 혹은 차있어도 ??면..
+# cf) if not k%n -> 0이면 == k가 n의 배수이면,, (1이상 들어오게했을 때) 
+# cf) if not arr -> 배열이비었으면 == arr이 비었으면
+# cf) if not arr[k] -> 배열 arr[k]가 비었으면
+# cf) if not arr[k] or arr[k] == ?? -> 배열arr[k]가 비었거나, < 차있더라도  ???면>
 
 
 ################ Input From input.txt ################
