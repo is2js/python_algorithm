@@ -20,7 +20,7 @@ def op1(arr):
 def op2(arr):
     return [ row[::-1] for row in arr]
 def op3(arr):
-    return list(map(list, zip(*(arr[::-1]))))
+    return list(map(zip(*(arr[::-1]))))
 def op4(arr):
     return list(zip(*arr))[::-1]
 
@@ -76,9 +76,9 @@ func_dict = {
 N, M, R =  map(int, input().split())
 A = [list(map(int, input().split())) for _ in range(N)]
 R_lst = list(map(int, input().split()))
-# print(R_lst)
-for r in R_lst:
-    A = func_dict[r](A)
+print(R_lst)
+# for r in R_lst:
+#     A = func_dict[r](A)
 
 for row in A:
     print(*row)
