@@ -6,10 +6,11 @@
    - 📜 practice01\~06 : 예제를 통한 알고리즘 분류별 Lv1~3 문제풀이(Codeit, Leetcode)
    - 🐍 concept6-3-1 ~ 6-3-6: concept06의 코드만 정리(주니온TV)
  - 📂 01_codeup: 🐍 Codeup기초 100제 중 마지막 배열문제들(6092\~6098)
- - 📂 02_boj_step_to_12: 🐍 백준 단계별 문제풀기 12단계까지 문제 중 시간초과 or 틀린 문제 풀이 및 고찰
+ - 📂 02_boj_step_to_12: 🐍 백준 단계별문제집 12단계까지-시간초과 or 틀린문제 풀이
  - 📂 03_Datastructure: 🐍 자료구조를 python Class로 구현한 code
  - **📂 04_problems_by_class: 🐍 알고리즘 분류별로 회고(느낀점)을 기록하면서 풀이(~ing)**
  - **📂 05_programmers: 🐍 프로그래머스 문제를 풀이(~ing)**
+ - **📂 06_regex_practice: 🐍 정규표현식 연습 및 모듈만들기(~ing)**
 
 
 
