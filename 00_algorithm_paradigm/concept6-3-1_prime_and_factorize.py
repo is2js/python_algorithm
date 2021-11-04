@@ -42,7 +42,7 @@ def isPrime2(n):
             return False
     else:
         return True
-print('❤3 isPrime2(n) >',isPrime(n))
+print('❤3 isPrime2(n) >',isPrime2(n))
 
 
 
