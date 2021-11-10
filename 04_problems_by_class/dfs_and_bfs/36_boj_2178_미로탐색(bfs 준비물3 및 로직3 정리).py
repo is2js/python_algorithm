@@ -1,5 +1,12 @@
 # 느낀점:
-# 
+# * 1. BFS준비물 3가지
+# *  1) MAX 혹은 방향벡터 2) 좌표별 dist(L) or ck(board) 3) deque에 시작좌표넣고 -> [자식queue에넣을때하는것처럼] dist넣기->ck하기 for 최단거리 1번만 입력
+# * 2. BFS기본로직 3
+# *  1) while dq or while True or while not cnt 등 이후 -> 꺼내서 -> if 조건:break 
+# *  2) 자체처리
+# *  3) 자식탐색 -> index검사 + ck검사 -> queue에 넣고 + dist 기록 + ck체크
+# * 3. dist로 최단거리를 추출한다. 만약, 시작좌표부터 카운팅한다면 +1해줘야한다.
+
 ################ Input From input.txt ################
 import sys
 from pprint import pprint
