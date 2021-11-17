@@ -22,4 +22,5 @@ from itertools import combinations, permutations, product
 # 1개배열 중복허용이라면 -> product 반드시 repeat= 인자로! 를 쓴다.
 lst = product((range(1, N+1)), repeat=M)
 for row in lst:
-  print(*row)
+  print(*row)   
+ 

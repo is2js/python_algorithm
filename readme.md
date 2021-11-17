@@ -1,5 +1,6 @@
 ![alt text](https://img.shields.io/badge/Python-3.8-red.svg)
 ![alt text](https://img.shields.io/badge/BOJ-Algorithm-blue.svg)
+
 ### 알고리즘 레포지토리 📂(folder/)  📜 (.ipynb)   🐍(.py)
  - 📂 00_algorithm_paradigm
    - 📜 concept01\~06 : 예제를 통한 알고리즘 분류별 개념정리(Codeit, Leetcode, 주니온TV)
